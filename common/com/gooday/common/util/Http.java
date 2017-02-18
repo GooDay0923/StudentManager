@@ -1,4 +1,4 @@
-package com.gooday.common;
+package com.gooday.common.util;
 
 import java.io.IOException;
 import java.io.InputStream;

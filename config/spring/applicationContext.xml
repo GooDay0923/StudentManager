@@ -10,4 +10,8 @@
    
    <import resource="applicationContext-redis.xml" />
    
+   <import resource="applicationContext-shiro.xml" />
+   
+   <!-- <import resource="applicationContext-schedule.xml" /> -->
+   
 </beans>

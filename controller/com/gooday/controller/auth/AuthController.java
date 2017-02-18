@@ -10,8 +10,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.gooday.common.JsonResult;
-import com.gooday.service.auth.IAuthService;
+import com.gooday.common.basic.JsonResult;
+import com.gooday.service.auth.IAdminService;
 
 
 @Controller
@@ -21,7 +21,7 @@ public class AuthController {
 	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 	
 	@Autowired
-	private IAuthService authService;
+	private IAdminService authService;
 	
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest request, HttpServletResponse response){

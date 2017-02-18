@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+	
+	<!-- 定时获取微信端accessToken -->
+	<bean id="accessTokenJob" class="com.medical.wechat.web.controller.WechatAccountController"/>  
+	<!-- <bean id="accessTokenTrigger" class="org.springframework.scheduling.quartz.CronTriggerBean"> -->
+	<bean id="accessTokenTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+       <property name="jobDetail" ref="accessTokenJobDetail"/>  
+       <!-- repeat every 1 hours -->
+	   <property name="repeatInterval" value="3600000" />
+       <!-- <property name="cronExpression" value="0 0 0/1 * * ?"/>  -->
+	</bean>  
+	<bean id="accessTokenJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="accessTokenJob"/>  
+        <property name="targetMethod" value="initAccessToken"/>  
+        <property name="concurrent" value="true"/>
+	</bean> 
+	
+	<!-- 定时获取微信企业医生端端accessToken -->
+	<bean id="docAccessTokenJob" class="com.medical.wechatdoc.web.controller.WechatDocController"/>  
+	<bean id="docAccessTokenTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+       <property name="jobDetail" ref="docAccessTokenJobDetail"/>  
+       <!-- repeat every 1 hours -->
+	   <property name="repeatInterval" value="3600000" />
+	</bean>  
+	<bean id="docAccessTokenJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="docAccessTokenJob"/>  
+        <property name="targetMethod" value="initDocAccessToken"/>  
+        <property name="concurrent" value="true"/>
+	</bean>  
+	
+	<!-- 定时发送微信推送任务 -->
+	<bean id="wechatPushJob" class="com.medical.wechat.web.controller.WechatPushController"/>  
+	<bean id="wechatPushTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+       <property name="jobDetail" ref="wechatPushJobDetail"/>  
+       <!-- repeat every 1 hours -->
+	   <property name="repeatInterval" value="120000" />
+	</bean>  
+	<bean id="wechatPushJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="wechatPushJob"/>  
+        <property name="targetMethod" value="run"/>  
+        <property name="concurrent" value="true"/>
+	</bean> 
+	
+	<!-- 定时发送微信医生企业号推送任务 -->
+	<bean id="wechatDocPushJob" class="com.medical.wechatdoc.service.impl.WechatDocTrackServiceImpl"/>  
+	<bean id="wechatDocPushTrigger" class="org.springframework.scheduling.quartz.SimpleTriggerBean">  
+       <property name="jobDetail" ref="wechatDocPushJobDetail"/>  
+	   <property name="repeatInterval" value="300000" />
+	</bean>
+	<bean id="wechatDocPushJobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">   
+        <property name="targetObject" ref="wechatDocPushJob"/>  
+        <property name="targetMethod" value="wechatDocQuestionPush"/>  
+        <property name="concurrent" value="true"/>
+	</bean>
+	
+    <!-- 任务调度工厂 -->
+	<bean id="business_task_SchedulerFactoryBean"
+		class="org.springframework.scheduling.quartz.SchedulerFactoryBean"
+		lazy-init="false">
+		<!-- Triggers集成 -->
+		<property name="triggers">
+			<list>
+				<ref bean="accessTokenTrigger" />
+				<ref bean="wechatPushTrigger" />
+				<ref bean="docAccessTokenTrigger" />
+				<ref bean="wechatDocPushTrigger" />
+			</list>
+		</property>
+		<!-- Quartz配置线程池 -->
+		<property name="quartzProperties">
+			<props>
+				<prop key="org.quartz.threadPool.threadCount">3</prop>
+			</props>
+		</property>
+		<!-- 启动时延时三秒开始任务 -->
+		<property name="startupDelay" value="0" />
+	</bean>
+	
+</beans>

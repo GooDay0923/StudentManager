@@ -21,7 +21,7 @@ public class Admin implements Serializable {
     /**
      * 加盐
      */
-    private String halt;
+    private String salt;
 
     /**
      * 启用状态 0：未启用 1：启用
@@ -64,12 +64,12 @@ public class Admin implements Serializable {
         this.password = password;
     }
 
-    public String getHalt() {
-        return halt;
+    public String getSalt() {
+        return salt;
     }
 
-    public void setHalt(String halt) {
-        this.halt = halt;
+    public void setSalt(String salt) {
+        this.salt = salt;
     }
 
     public Boolean getEnable() {
@@ -95,4 +95,9 @@ public class Admin implements Serializable {
     public void setGmtModified(Integer gmtModified) {
         this.gmtModified = gmtModified;
     }
+    
+    public String getCredentialsSalt(){
+    	return username + salt + password;
+    }
+    
 }

@@ -1,4 +1,4 @@
-package com.gooday.common;
+package com.gooday.common.basic;
 
 public class JsonResult {
 	
