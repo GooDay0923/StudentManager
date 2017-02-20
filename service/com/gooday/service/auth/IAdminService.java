@@ -8,4 +8,6 @@ public interface IAdminService {
 	
 	public Admin getAdminByUsername(String username);
 	
+	public Integer saveAdmin(Admin admin) throws Exception;
+	
 }

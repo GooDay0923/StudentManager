@@ -119,8 +119,9 @@
         <property name="filterChainDefinitions">
             <value>
                 /static/** = anon
-                /login = authc
-                /logout = logout
+                /auth/login = authc
+                /auth/logout = logout
+                /** = user
             </value>
         </property>
     </bean>

@@ -26,4 +26,17 @@ public class AdminServiceTest {
 		
 	}
 	
+	@Test
+	public void saveAdmin() throws Exception {
+		Admin admin = new Admin();
+		admin.setUsername("admin");
+		admin.setPassword("123456");
+		admin.setEnable(true);
+		admin.setGmtCreate((int)System.currentTimeMillis() / 1000);
+		admin.setGmtModified((int)System.currentTimeMillis() / 1000);
+		
+		Integer id = adminService.saveAdmin(admin);
+		System.out.println(id.toString());
+	}
+	
 }
