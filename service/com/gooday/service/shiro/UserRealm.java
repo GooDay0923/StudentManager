@@ -13,13 +13,13 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gooday.model.admin.Admin;
-import com.gooday.service.auth.impl.AdminService;
+import com.gooday.service.sys.IAdminService;
 
 
 public class UserRealm extends AuthorizingRealm {
 
 	@Autowired
-	private AdminService adminService;
+	private IAdminService adminService;
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {

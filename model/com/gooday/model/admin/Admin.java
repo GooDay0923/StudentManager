@@ -97,7 +97,7 @@ public class Admin implements Serializable {
     }
     
     public String getCredentialsSalt(){
-    	return username + salt;
+    	return username + salt + password;
     }
     
 }

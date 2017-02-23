@@ -1,4 +1,4 @@
-package com.gooday.controller.auth;
+package com.gooday.controller.sys;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -9,10 +9,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("")
-public class IndexController {
+@RequestMapping("admin")
+public class AdminController {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
+private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 	
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest request, HttpServletResponse response){

@@ -1,12 +1,12 @@
-package com.gooday.service.auth.impl;
+package com.gooday.service.sys.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gooday.mapper.admin.AdminMapper;
 import com.gooday.model.admin.Admin;
-import com.gooday.service.auth.IAdminService;
 import com.gooday.service.shiro.PasswordHelper;
+import com.gooday.service.sys.IAdminService;
 
 @Service
 public class AdminService implements IAdminService{

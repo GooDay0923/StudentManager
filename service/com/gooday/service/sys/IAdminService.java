@@ -1,4 +1,4 @@
-package com.gooday.service.auth;
+package com.gooday.service.sys;
 
 import com.gooday.model.admin.Admin;
 
