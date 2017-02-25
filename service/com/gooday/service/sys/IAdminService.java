@@ -4,7 +4,7 @@ import com.gooday.model.admin.Admin;
 
 public interface IAdminService {
 
-	public Admin getAdminByUsernameAndPassword(String username, String password);
+	public Admin getAdminByUsernameAndPassword(Admin admin);
 	
 	public Admin getAdminByUsername(String username);
 	

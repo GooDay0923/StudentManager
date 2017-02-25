@@ -18,8 +18,10 @@ public class AdminService implements IAdminService{
 	private PasswordHelper passwordHelper;
 	
 	@Override
-	public Admin getAdminByUsernameAndPassword(String username, String password) {
-		return adminMapper.selectByUsernameAndPassword(username, password);
+	public Admin getAdminByUsernameAndPassword(Admin admin) {
+		
+		String password = passwordHelper.getEncryptPassword(admin);
+		return adminMapper.selectByUsernameAndPassword(admin.getUsername(), password);
 	}
 
 	@Override

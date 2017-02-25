@@ -119,7 +119,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /static/** = anon
-                /auth/login = anon
+                /auth/login = authc
                 /auth/logout = logout
                 /** = user
             </value>

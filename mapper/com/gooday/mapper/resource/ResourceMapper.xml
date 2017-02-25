@@ -3,7 +3,7 @@
 <mapper namespace="com.gooday.mapper.resource.ResourceMapper">
   <resultMap id="BaseResultMap" type="com.gooday.model.resource.Resource">
     <id column="id" jdbcType="BIGINT" property="id" />
-    <result column="p_id" jdbcType="INTEGER" property="pId" />
+    <result column="p_id" jdbcType="BIGINT" property="pId" />
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="url" jdbcType="VARCHAR" property="url" />
@@ -35,7 +35,7 @@
       url, type, icon, sort, 
       deleted, gmt_create, gmt_modified
       )
-    values (#{pId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+    values (#{pId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
       #{url,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
       #{deleted,jdbcType=BIT}, #{gmtCreate,jdbcType=INTEGER}, #{gmtModified,jdbcType=INTEGER}
       )
@@ -79,7 +79,7 @@
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="pId != null">
-        #{pId,jdbcType=INTEGER},
+        #{pId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         #{name,jdbcType=VARCHAR},
@@ -114,7 +114,7 @@
     update resource
     <set>
       <if test="pId != null">
-        p_id = #{pId,jdbcType=INTEGER},
+        p_id = #{pId,jdbcType=BIGINT},
       </if>
       <if test="name != null">
         name = #{name,jdbcType=VARCHAR},
@@ -148,7 +148,7 @@
   </update>
   <update id="updateByPrimaryKey" parameterType="com.gooday.model.resource.Resource">
     update resource
-    set p_id = #{pId,jdbcType=INTEGER},
+    set p_id = #{pId,jdbcType=BIGINT},
       name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},

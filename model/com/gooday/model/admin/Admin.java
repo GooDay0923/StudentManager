@@ -96,8 +96,8 @@ public class Admin implements Serializable {
         this.gmtModified = gmtModified;
     }
     
-    public String getCredentialsSalt(){
-    	return username + salt + password;
+    public String getCredentialsSalt(String input){
+    	return username + salt + input;
     }
     
 }

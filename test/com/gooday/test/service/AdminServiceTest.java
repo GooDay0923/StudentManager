@@ -7,7 +7,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.gooday.model.admin.Admin;
-import com.gooday.service.auth.IAdminService;
+import com.gooday.service.sys.IAdminService;
 
 
 @RunWith(SpringJUnit4ClassRunner.class) 
@@ -19,10 +19,13 @@ public class AdminServiceTest {
 	
 	@Test
 	public void getAdminByUsernameAndPassword() {
-		String username = "admin";
-		String password = "admin";
 		
-		Admin admin = adminService.getAdminByUsernameAndPassword(username, password);
+		Admin admin = new Admin();
+		admin.setUsername("admin");
+		admin.setPassword("123456");
+		admin.setSalt("e10e0ee1cf9098bf7c4e4535d492d076");
+		
+		Admin adminRecord = adminService.getAdminByUsernameAndPassword(admin);
 		
 	}
 	

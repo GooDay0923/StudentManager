@@ -34,10 +34,12 @@ public class AuthController {
             error = "用户名或密码错误";
         } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
             error = "用户名或密码错误";
+        } else if(LockedAccountException.class.getName().equals(exceptionClassName)) {
+            error = "该账户不可用";
+        } else if(ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
+            error = "该账户已被锁定";
         } else if(exceptionClassName != null) {
             error = "登录错误：" + exceptionClassName;
-        }else{
-        	error = "请输入用户名和密码";
         }
         request.setAttribute("error", error);
 		

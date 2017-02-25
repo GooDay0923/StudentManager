@@ -34,7 +34,7 @@ public class PasswordHelper {
         String newPassword = new SimpleHash(
                 algorithmName,
                 admin.getPassword(),
-                ByteSource.Util.bytes(admin.getCredentialsSalt()),
+                ByteSource.Util.bytes(admin.getCredentialsSalt(admin.getPassword())),
                 hashIterations).toHex();
 
         admin.setPassword(newPassword);
@@ -45,9 +45,19 @@ public class PasswordHelper {
     	String newPassword = new SimpleHash(
                 algorithmName,
                 admin.getPassword(),
-                ByteSource.Util.bytes(admin.getCredentialsSalt()),
+                ByteSource.Util.bytes(admin.getCredentialsSalt(admin.getPassword())),
                 hashIterations).toHex();
         admin.setPassword(newPassword);
+    }
+    
+    public String getEncryptPassword(Admin admin){
+    	String newPassword = new SimpleHash(
+                algorithmName,
+                admin.getPassword(),
+                ByteSource.Util.bytes(admin.getCredentialsSalt(admin.getPassword())),
+                hashIterations).toHex();
+    	
+    	return newPassword;
     }
     
 }

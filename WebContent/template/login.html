@@ -37,10 +37,15 @@
     <form method="post" class="am-form" action="${rc.contextPath}/auth/login" >
       <label for="username">用户名:</label>
       <input type="text" name="username" id="username" value=""  placeholder="输入用户名（至少 3 个字符）" minlength="3">
-      <br>
+      <br />
       <label for="password">密码:</label>
       <input type="password" name="password" id="password" value="" placeholder="密码" >
-      <br>
+      <#if error>
+		<div class="am-alert am-alert-dange">
+		  ${error}
+	    </div>
+      </#if>
+      <br />
       <label for="remember-me">
         <input id="remember-me" type="checkbox">
         记住密码

@@ -11,7 +11,7 @@ public class Resource implements Serializable {
     /**
      * 父菜单ID，一级菜单为0
      */
-    private Integer pId;
+    private Long pId;
 
     /**
      * 菜单名称
@@ -68,11 +68,11 @@ public class Resource implements Serializable {
         this.id = id;
     }
 
-    public Integer getpId() {
+    public Long getpId() {
         return pId;
     }
 
-    public void setpId(Integer pId) {
+    public void setpId(Long pId) {
         this.pId = pId;
     }
 
