@@ -63,14 +63,14 @@
     
     <!-- 异常解析 -->
     <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
-        <property name="defaultErrorView" value="/error/500" />
-        <property name="exceptionMappings">
+        <property name="defaultErrorView" value="/template/error/404.html" />
+        <!-- <property name="exceptionMappings">
             <props>
-                <prop key="java.lang.SQLException">/error/404</prop>
-                <prop key="java.lang.Exception">/error/404</prop>
-                <prop key="java.lang.RuntimeException">/error/404</prop>
+                <prop key="java.lang.SQLException">/template/error/404</prop>
+                <prop key="java.lang.Exception">/template/error/404</prop>
+                <prop key="java.lang.RuntimeException">/template/error/404</prop>
             </props>
-        </property>
+        </property> -->
         <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
         <property name="warnLogCategory" value="WARN"></property>
     </bean>

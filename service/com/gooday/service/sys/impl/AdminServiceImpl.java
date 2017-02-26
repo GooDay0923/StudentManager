@@ -9,7 +9,7 @@ import com.gooday.service.shiro.PasswordHelper;
 import com.gooday.service.sys.IAdminService;
 
 @Service
-public class AdminService implements IAdminService{
+public class AdminServiceImpl implements IAdminService{
 
 	@Autowired
 	private AdminMapper adminMapper;
