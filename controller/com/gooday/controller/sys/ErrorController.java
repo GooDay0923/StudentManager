@@ -8,12 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gooday.common.basic.BaseController;
+
 @Controller
 @RequestMapping("*")
-public class ErrorController {
+public class ErrorController extends BaseController {
 
-private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
-	
 	@RequestMapping(value = "*")
 	public String page(HttpServletRequest request, HttpServletResponse response){
 		logger.info("404");

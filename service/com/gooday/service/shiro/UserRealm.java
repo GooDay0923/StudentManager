@@ -24,11 +24,13 @@ public class UserRealm extends AuthorizingRealm {
 	
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principals) {
-		String username = (String)principals.getPrimaryPrincipal();
+		Admin admin = (Admin)principals.getPrimaryPrincipal();
 
+		
+		
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         
-        
+        admin.getUsername();
 		return authorizationInfo;
 	}
 

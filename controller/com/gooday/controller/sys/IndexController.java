@@ -8,12 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import com.gooday.common.basic.BaseController;
+
 @Controller
 @RequestMapping("")
-public class IndexController {
+public class IndexController extends BaseController {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
-	
 	@RequestMapping(value = "/")
 	public String index(HttpServletRequest request, HttpServletResponse response){
 		logger.info("index");

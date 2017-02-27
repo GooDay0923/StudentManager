@@ -14,16 +14,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gooday.common.basic.BaseController;
 import com.gooday.common.basic.JsonResult;
 import com.gooday.service.sys.IAdminService;
 
 
 @Controller
 @RequestMapping("/auth")
-public class AuthController {
+public class AuthController extends BaseController {
 
-	private Logger logger = LoggerFactory.getLogger(this.getClass().getName());
-	
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request, HttpServletResponse response){
 		logger.info("login");
