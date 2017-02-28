@@ -6,13 +6,11 @@ import com.gooday.model.resource.Resource;
 
 public interface IResourceService {
 
-	public Resource getResourceById(Integer id);
+	public Resource getResourceById(Long id);
 	
 	public void SaveResource(Resource resource);
 	
 	public void UpdateResourceById(Resource resource);
-	
-	public List<Resource> listByPId(Integer pId);
 	
 	public List<Resource> listUserResource(Long adminId);
 	

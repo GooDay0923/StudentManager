@@ -1,12 +1,16 @@
 package com.gooday.service.sys.impl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gooday.mapper.admin.AdminMapper;
-import com.gooday.mapper.admin.AdminRoleMapMapper;
+import com.gooday.mapper.role.RoleMapper;
+import com.gooday.mapper.role.RoleResourceMapMapper;
 import com.gooday.model.admin.Admin;
-import com.gooday.model.admin.AdminRoleMap;
+import com.gooday.model.role.Role;
+import com.gooday.model.role.RoleResourceMap;
 import com.gooday.service.shiro.PasswordHelper;
 import com.gooday.service.sys.IAdminService;
 
@@ -17,7 +21,10 @@ public class AdminServiceImpl implements IAdminService{
 	private AdminMapper adminMapper;
 	
 	@Autowired
-	private AdminRoleMapMapper adminRoleMapper;
+	private RoleMapper roleMapper;
+	
+	@Autowired
+	private RoleResourceMapMapper roleResourceMapMapper;
 	
 	@Autowired
 	private PasswordHelper passwordHelper;
@@ -47,17 +54,6 @@ public class AdminServiceImpl implements IAdminService{
 		return adminMapper.insertSelective(admin);
 	}
 
-	@Override
-	public AdminRoleMap getAdminRoleMapById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public void saveAdminRoleMap(AdminRoleMap adminRoleMap) {
-		// TODO Auto-generated method stub
-		
-	}
 	
 	
 

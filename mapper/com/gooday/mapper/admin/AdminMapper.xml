@@ -7,33 +7,39 @@
     <result column="password" jdbcType="VARCHAR" property="password" />
     <result column="salt" jdbcType="VARCHAR" property="salt" />
     <result column="enable" jdbcType="BIT" property="enable" />
+    <result column="role_id" jdbcType="BIGINT" property="roleId" />
     <result column="gmt_create" jdbcType="INTEGER" property="gmtCreate" />
     <result column="gmt_modified" jdbcType="INTEGER" property="gmtModified" />
   </resultMap>
+  
   <sql id="Base_Column_List">
-    id, username, password, salt, enable, gmt_create, gmt_modified
+    id, username, password, salt, enable, role_id, gmt_create, gmt_modified
   </sql>
+  
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
     from admin
     where id = #{id,jdbcType=BIGINT}
   </select>
+  
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
     delete from admin
     where id = #{id,jdbcType=BIGINT}
   </delete>
+  
   <insert id="insert" parameterType="com.gooday.model.admin.Admin">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into admin (username, password, salt, 
-      enable, gmt_create, gmt_modified
-      )
+      enable, role_id, gmt_create, 
+      gmt_modified)
     values (#{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{salt,jdbcType=VARCHAR}, 
-      #{enable,jdbcType=BIT}, #{gmtCreate,jdbcType=INTEGER}, #{gmtModified,jdbcType=INTEGER}
-      )
+      #{enable,jdbcType=BIT}, #{roleId,jdbcType=BIGINT}, #{gmtCreate,jdbcType=INTEGER}, 
+      #{gmtModified,jdbcType=INTEGER})
   </insert>
+  
   <insert id="insertSelective" parameterType="com.gooday.model.admin.Admin">
     <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
@@ -51,6 +57,9 @@
       </if>
       <if test="enable != null">
         enable,
+      </if>
+      <if test="roleId != null">
+        role_id,
       </if>
       <if test="gmtCreate != null">
         gmt_create,
@@ -72,6 +81,9 @@
       <if test="enable != null">
         #{enable,jdbcType=BIT},
       </if>
+      <if test="roleId != null">
+        #{roleId,jdbcType=BIGINT},
+      </if>
       <if test="gmtCreate != null">
         #{gmtCreate,jdbcType=INTEGER},
       </if>
@@ -80,6 +92,7 @@
       </if>
     </trim>
   </insert>
+  
   <update id="updateByPrimaryKeySelective" parameterType="com.gooday.model.admin.Admin">
     update admin
     <set>
@@ -95,6 +108,9 @@
       <if test="enable != null">
         enable = #{enable,jdbcType=BIT},
       </if>
+      <if test="roleId != null">
+        role_id = #{roleId,jdbcType=BIGINT},
+      </if>
       <if test="gmtCreate != null">
         gmt_create = #{gmtCreate,jdbcType=INTEGER},
       </if>
@@ -104,12 +120,14 @@
     </set>
     where id = #{id,jdbcType=BIGINT}
   </update>
+  
   <update id="updateByPrimaryKey" parameterType="com.gooday.model.admin.Admin">
     update admin
     set username = #{username,jdbcType=VARCHAR},
       password = #{password,jdbcType=VARCHAR},
       salt = #{salt,jdbcType=VARCHAR},
       enable = #{enable,jdbcType=BIT},
+      role_id = #{roleId,jdbcType=BIGINT},
       gmt_create = #{gmtCreate,jdbcType=INTEGER},
       gmt_modified = #{gmtModified,jdbcType=INTEGER}
     where id = #{id,jdbcType=BIGINT}
@@ -128,6 +146,5 @@
       FROM admin
       WHERE username = #{username}
   </select>
-  
   
 </mapper>

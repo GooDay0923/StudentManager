@@ -29,6 +29,11 @@ public class Admin implements Serializable {
     private Boolean enable;
 
     /**
+     * 角色id
+     */
+    private Long roleId;
+
+    /**
      * 创建时间
      */
     private Integer gmtCreate;
@@ -80,6 +85,14 @@ public class Admin implements Serializable {
         this.enable = enable;
     }
 
+    public Long getRoleId() {
+        return roleId;
+    }
+
+    public void setRoleId(Long roleId) {
+        this.roleId = roleId;
+    }
+
     public Integer getGmtCreate() {
         return gmtCreate;
     }
@@ -95,9 +108,8 @@ public class Admin implements Serializable {
     public void setGmtModified(Integer gmtModified) {
         this.gmtModified = gmtModified;
     }
-    
-    public String getCredentialsSalt(String input){
-    	return username + salt + input;
-    }
-    
+
+	public String getCredentialsSalt(String input) {
+		return username + password + input;
+	}
 }

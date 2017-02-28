@@ -16,27 +16,18 @@ public class ResourceServiceImpl implements IResourceService{
 	private ResourceMapper resourceMapper;
 	
 	@Override
-	public Resource getResourceById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+	public Resource getResourceById(Long id) {
+		return resourceMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public void SaveResource(Resource resource) {
-		// TODO Auto-generated method stub
-		
+		resourceMapper.insertSelective(resource);
 	}
 
 	@Override
 	public void UpdateResourceById(Resource resource) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public List<Resource> listByPId(Integer pId) {
-		// TODO Auto-generated method stub
-		return null;
+		resourceMapper.updateByPrimaryKeySelective(resource);
 	}
 
 	@Override
@@ -47,8 +38,7 @@ public class ResourceServiceImpl implements IResourceService{
 
 	@Override
 	public void removeResourceById(Long id) {
-		// TODO Auto-generated method stub
-		
+		resourceMapper.deleteByPrimaryKey(id);
 	}
 
 }

@@ -20,5 +20,4 @@ public interface AdminMapper {
     Admin selectByUsernameAndPassword(@Param("username")String username, @Param("password")String password);
     
     Admin selectByUsername(@Param("username")String username);
-    
 }
