@@ -110,6 +110,6 @@ public class Admin implements Serializable {
     }
 
 	public String getCredentialsSalt(String input) {
-		return username + password + input;
+		return username + salt + input;
 	}
 }

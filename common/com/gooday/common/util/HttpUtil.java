@@ -14,10 +14,10 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class Http {
+public class HttpUtil {
 	
 	// 日志接口
-	private static Logger logger = LoggerFactory.getLogger(Http.class.getName());
+	private static Logger logger = LoggerFactory.getLogger(HttpUtil.class.getName());
 	
 	public static String  get(String path){
 		HttpURLConnection connection = null;

@@ -1,14 +1,19 @@
 package com.gooday.service.sys.impl;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gooday.mapper.admin.AdminMapper;
+import com.gooday.mapper.resource.ResourceMapper;
 import com.gooday.mapper.role.RoleMapper;
 import com.gooday.mapper.role.RoleResourceMapMapper;
 import com.gooday.model.admin.Admin;
+import com.gooday.model.resource.Resource;
 import com.gooday.model.role.Role;
 import com.gooday.model.role.RoleResourceMap;
 import com.gooday.service.shiro.PasswordHelper;
@@ -25,6 +30,9 @@ public class AdminServiceImpl implements IAdminService{
 	
 	@Autowired
 	private RoleResourceMapMapper roleResourceMapMapper;
+	
+	@Autowired
+	private ResourceMapper resourceMapper;
 	
 	@Autowired
 	private PasswordHelper passwordHelper;
@@ -52,6 +60,33 @@ public class AdminServiceImpl implements IAdminService{
 		checkUsername(admin.getUsername());
 		passwordHelper.encryptPassword(admin);
 		return adminMapper.insertSelective(admin);
+	}
+
+	@Override
+	public Set<String> getUserRole(String username) {
+		Admin admin = adminMapper.selectByUsername(username);
+		Role role = roleMapper.selectByPrimaryKey(admin.getRoleId());
+		Set<String> roleName = new HashSet<String>();
+		roleName.add(role.getName());
+		return roleName;
+	}
+
+	@Override
+	public Set<String> getUserPermissions(String username) {
+		Admin admin = adminMapper.selectByUsername(username);
+		Set<String> permissionNames = new HashSet<String>();
+		
+		if(admin != null && admin.getRoleId() != 0L){
+			List<Resource> resourceList = resourceMapper.selectByRoleId(admin.getRoleId());
+			for(Resource resource : resourceList){
+//				if(!StringUtils.isEmpty()){
+//					
+//				}
+			}
+			
+		}
+		
+		return permissionNames;
 	}
 
 	

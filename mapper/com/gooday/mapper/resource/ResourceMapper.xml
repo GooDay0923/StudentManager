@@ -7,6 +7,7 @@
     <result column="name" jdbcType="VARCHAR" property="name" />
     <result column="description" jdbcType="VARCHAR" property="description" />
     <result column="url" jdbcType="VARCHAR" property="url" />
+    <result column="permission" jdbcType="VARCHAR" property="url" />
     <result column="type" jdbcType="SMALLINT" property="type" />
     <result column="icon" jdbcType="VARCHAR" property="icon" />
     <result column="sort" jdbcType="SMALLINT" property="sort" />
@@ -16,7 +17,7 @@
   </resultMap>
   
   <sql id="Base_Column_List">
-    id, p_id, name, description, url, type, icon, sort, deleted, gmt_create, gmt_modified
+    id, p_id, name, description, url, permission, type, icon, sort, deleted, gmt_create, gmt_modified
   </sql>
   
   <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
@@ -36,11 +37,11 @@
       SELECT LAST_INSERT_ID()
     </selectKey>
     insert into resource (p_id, name, description, 
-      url, type, icon, sort, 
+      url, permission, type, icon, sort, 
       deleted, gmt_create, gmt_modified
       )
     values (#{pId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
+      #{url,jdbcType=VARCHAR}, #{permission,jdbcType=VARCHAR}, #{type,jdbcType=SMALLINT}, #{icon,jdbcType=VARCHAR}, #{sort,jdbcType=SMALLINT}, 
       #{deleted,jdbcType=BIT}, #{gmtCreate,jdbcType=INTEGER}, #{gmtModified,jdbcType=INTEGER}
       )
   </insert>
@@ -62,6 +63,9 @@
       </if>
       <if test="url != null">
         url,
+      </if>
+      <if test="permission != null">
+        permission,
       </if>
       <if test="type != null">
         type,
@@ -94,6 +98,9 @@
       </if>
       <if test="url != null">
         #{url,jdbcType=VARCHAR},
+      </if>
+      <if test="permission != null">
+        #{permission,jdbcType=VARCHAR},
       </if>
       <if test="type != null">
         #{type,jdbcType=SMALLINT},
@@ -131,6 +138,9 @@
       <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
       </if>
+      <if test="permission != null">
+        permission = #{permission,jdbcType=VARCHAR},
+      </if>
       <if test="type != null">
         type = #{type,jdbcType=SMALLINT},
       </if>
@@ -159,6 +169,7 @@
       name = #{name,jdbcType=VARCHAR},
       description = #{description,jdbcType=VARCHAR},
       url = #{url,jdbcType=VARCHAR},
+      permission = #{permission,jdbcType=VARCHAR},
       type = #{type,jdbcType=SMALLINT},
       icon = #{icon,jdbcType=VARCHAR},
       sort = #{sort,jdbcType=SMALLINT},
@@ -175,6 +186,11 @@
     where type = #{type,jdbcType=SMALLINT}
   </select>
   
-  
+  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    SELECT r.id, r.p_id, r.description, r.url, r.permission, r.type, r.icon, r.sort, r.deleted
+    FROM resource r
+    INNER JOIN role_resource_map rr ON rr.resource_id = r.id AND rr.role_id = #{role_id}
+    WHERE r.deleted = 0
+  </select>
   
 </mapper>

@@ -1,5 +1,7 @@
 package com.gooday.mapper.resource;
 
+import java.util.List;
+
 import com.gooday.model.resource.Resource;
 
 public interface ResourceMapper {
@@ -14,4 +16,6 @@ public interface ResourceMapper {
     int updateByPrimaryKeySelective(Resource record);
 
     int updateByPrimaryKey(Resource record);
+    
+    List<Resource> selectByRoleId(Long roleId);
 }

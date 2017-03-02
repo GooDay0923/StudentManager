@@ -27,8 +27,21 @@ public class Resource implements Serializable {
      * url
      */
     private String url;
-
+    
     /**
+     * 权限
+     */
+    private String permission;
+
+    public String getPermission() {
+		return permission;
+	}
+
+	public void setPermission(String permission) {
+		this.permission = permission;
+	}
+
+	/**
      * 类型   0：目录   1：菜单   2：按钮
      */
     private Short type;
