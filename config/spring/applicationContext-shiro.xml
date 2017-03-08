@@ -96,8 +96,9 @@
         <property name="loginUrl" value="/auth/login"/>
     </bean>
     
+    
+    <bean id="sysUserFilter" class="com.gooday.controller.sys.filter.SysAdminFilter"/>
     <!-- 
-    <bean id="sysUserFilter" class="com.medical.sys.web.filter.SysUserFilter"/>
     <bean id="aclFilter" class="com.medical.sys.web.filter.ACLFilter"/>
 	-->
 	
@@ -110,8 +111,8 @@
         <property name="filters">
             <util:map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
+                <entry key="sysAdmin" value-ref="sysAdminFilter"/>
                 <!-- 
-                <entry key="sysUser" value-ref="sysUserFilter"/>
                 <entry key="acl" value-ref="aclFilter"/>
                  -->
             </util:map>
@@ -121,7 +122,7 @@
                 /static/** = anon
                 /auth/login = authc
                 /auth/logout = logout
-                /** = user
+                /** = user, sysAdmin
             </value>
         </property>
     </bean>

@@ -3,6 +3,7 @@ package com.gooday.controller.sys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
@@ -33,6 +34,8 @@ public class AuthController extends BaseController {
             error = "用户名或密码错误";
         } else if(IncorrectCredentialsException.class.getName().equals(exceptionClassName)) {
             error = "用户名或密码错误";
+        } else if(AuthenticationException.class.getName().equals(exceptionClassName)){     
+        	error = "用户名或密码错误";
         } else if(LockedAccountException.class.getName().equals(exceptionClassName)) {
             error = "该账户不可用";
         } else if(ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
@@ -43,19 +46,6 @@ public class AuthController extends BaseController {
         request.setAttribute("error", error);
 		
 		return "login";
-	}
-	
-	@RequestMapping(value = "/test")
-	@ResponseBody 
-	public JsonResult test(HttpServletRequest request, HttpServletResponse response){
-		logger.info("test");
-		
-		JsonResult jsonResult = new JsonResult();
-		jsonResult.setErrormsg("test");
-		jsonResult.setErrorcode("123");
-		jsonResult.setData(null);
-		
-		return jsonResult;
 	}
 	
 }
