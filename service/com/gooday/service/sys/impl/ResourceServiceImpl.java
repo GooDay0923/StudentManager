@@ -32,7 +32,7 @@ public class ResourceServiceImpl implements IResourceService{
 
 	@Override
 	public List<Resource> listUserResource(Long adminId) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 
