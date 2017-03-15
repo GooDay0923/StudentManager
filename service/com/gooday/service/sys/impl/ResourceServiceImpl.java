@@ -41,4 +41,10 @@ public class ResourceServiceImpl implements IResourceService{
 		resourceMapper.deleteByPrimaryKey(id);
 	}
 
+	@Override
+	public List<Resource> listAllResource() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

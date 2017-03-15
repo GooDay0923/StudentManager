@@ -17,20 +17,17 @@ public class RoleServiceImpl implements IRoleService{
 	
 	@Override
 	public Role getRoleById(Long id) {
-		// TODO Auto-generated method stub
-		return null;
+		return roleMapper.selectByPrimaryKey(id);
 	}
 
 	@Override
 	public void saveRole(Role role) {
-		// TODO Auto-generated method stub
-		
+		roleMapper.insertSelective(role);
 	}
 
 	@Override
 	public void removeRoleById(Long id) {
-		// TODO Auto-generated method stub
-		
+		roleMapper.deleteByPrimaryKey(id);
 	}
 
 }

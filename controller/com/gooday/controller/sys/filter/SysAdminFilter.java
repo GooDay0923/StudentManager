@@ -7,6 +7,7 @@ import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.web.filter.PathMatchingFilter;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import com.gooday.model.admin.Admin;
 import com.gooday.service.sys.IAdminService;
 import com.gooday.service.sys.IResourceService;
 
@@ -23,6 +24,14 @@ public class SysAdminFilter extends PathMatchingFilter {
     public boolean onPreHandle(ServletRequest request, ServletResponse response, Object mappedValue) throws Exception {
     	
     	String username = (String)SecurityUtils.getSubject().getPrincipal();
+    	
+    	Admin admin = adminService.getAdminByUsername(username);
+    	if(admin != null){
+    		resourceService.listUserResource(admin.getId());
+    	} else {
+    		
+    	}
+    	
     	
     	request.setAttribute("menus", "test");
     	

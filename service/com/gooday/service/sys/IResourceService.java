@@ -16,4 +16,6 @@ public interface IResourceService {
 	
 	public void removeResourceById(Long id);
 	
+	public List<Resource> listAllResource();
+	
 }

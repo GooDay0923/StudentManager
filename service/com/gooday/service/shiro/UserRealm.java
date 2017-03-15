@@ -1,5 +1,10 @@
 package com.gooday.service.shiro;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Set;
+
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;
@@ -14,7 +19,10 @@ import org.apache.shiro.util.ByteSource;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.gooday.model.admin.Admin;
+import com.gooday.model.resource.Resource;
 import com.gooday.service.sys.IAdminService;
+import com.gooday.service.sys.IResourceService;
+
 
 
 public class UserRealm extends AuthorizingRealm {
@@ -27,7 +35,13 @@ public class UserRealm extends AuthorizingRealm {
 		String username = (String)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         
+        Set<String> permissions = adminService.getUserPermissions(username);
         
+        Set<String> roles = adminService.getUserRole(username);
+        
+  		authorizationInfo.setRoles(roles);
+  		authorizationInfo.setStringPermissions(permissions);
+  		
 		return authorizationInfo;
 	}
 
