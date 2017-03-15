@@ -17,5 +17,8 @@ public interface ResourceMapper {
 
     int updateByPrimaryKey(Resource record);
     
-    List<Resource> selectByRoleId(Long roleId);
+    List<Resource> selectByRoleIdAndType(Long roleId, Integer type);
+    
+    List<Resource> selectByType(Integer type);
+    
 }

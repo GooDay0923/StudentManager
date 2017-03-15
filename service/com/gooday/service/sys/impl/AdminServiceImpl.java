@@ -76,18 +76,22 @@ public class AdminServiceImpl implements IAdminService{
 		Admin admin = adminMapper.selectByUsername(username);
 		Set<String> permissionNames = new HashSet<String>();
 		
+		if(admin == null){
+			return permissionNames;
+		}
+		
 		List<Resource> resourceList = null;
 		
-		if(admin != null && admin.getRoleId() != 0L){
-			resourceList = resourceMapper.selectByRoleId(admin.getRoleId());
+		if(admin.getRoleId() != 1L){
+			resourceList = resourceMapper.selectByRoleIdAndType(admin.getRoleId(), Resource.TYPE_BUTTON);
 		} else {
-//			resourceList = 
+			resourceList = resourceMapper.selectByType(Resource.TYPE_BUTTON);
 		}
 		
 		for(Resource resource : resourceList){
-//			if(!StringUtils.isEmpty()){
-//				
-//			}
+			if(!StringUtils.isEmpty(resource.getPermission())){
+				permissionNames.add(resource.getPermission());
+			}
 		}
 		
 		return permissionNames;

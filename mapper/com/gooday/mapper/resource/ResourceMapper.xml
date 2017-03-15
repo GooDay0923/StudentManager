@@ -186,11 +186,11 @@
     where type = #{type,jdbcType=SMALLINT}
   </select>
   
-  <select id="selectByRoleId" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByRoleIdAndType" resultMap="BaseResultMap" parameterType="java.lang.Long" >
     SELECT r.id, r.p_id, r.description, r.url, r.permission, r.type, r.icon, r.sort, r.deleted
     FROM resource r
     INNER JOIN role_resource_map rr ON rr.resource_id = r.id AND rr.role_id = #{role_id}
-    WHERE r.deleted = 0
+    WHERE r.deleted = 0 AND r.type = #{type}
   </select>
   
 </mapper>

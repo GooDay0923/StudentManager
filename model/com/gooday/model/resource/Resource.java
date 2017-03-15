@@ -6,6 +6,11 @@ import java.io.Serializable;
  * @author 
  */
 public class Resource implements Serializable {
+	
+	public final static Integer TYPE_CATALOG = 0;
+	public final static Integer TYPE_MENU = 1;
+	public final static Integer TYPE_BUTTON = 2;
+	
     private Long id;
 
     /**
