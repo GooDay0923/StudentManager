@@ -66,8 +66,10 @@ public class AdminServiceImpl implements IAdminService{
 	public Set<String> getUserRole(String username) {
 		Admin admin = adminMapper.selectByUsername(username);
 		Role role = roleMapper.selectByPrimaryKey(admin.getRoleId());
+		
 		Set<String> roleName = new HashSet<String>();
 		roleName.add(role.getName());
+		
 		return roleName;
 	}
 

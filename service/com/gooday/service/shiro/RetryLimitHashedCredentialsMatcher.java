@@ -30,11 +30,11 @@ public class RetryLimitHashedCredentialsMatcher extends HashedCredentialsMatcher
             retryCount = new AtomicInteger(0);
             passwordRetryCache.put(username, retryCount);
         }
-        //if retry count > 10 重试大于10次抛出异常
-        if(retryCount.incrementAndGet() > 10) {
-            throw new ExcessiveAttemptsException();
+        //if retry count > 5 重试大于5次抛出异常
+        if(retryCount.incrementAndGet() > 5) {
+            throw new ExcessiveAttemptsException("登录次数大于5次，请等待xx分钟后再次登录");
         }
-
+        
         boolean matches = super.doCredentialsMatch(token, info);
         if(matches) {
             //clear retry count

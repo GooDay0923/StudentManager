@@ -8,6 +8,9 @@
 	</description>
 	<!-- 缓存管理器 -->
     <bean id="cacheManager" class="org.apache.shiro.cache.MemoryConstrainedCacheManager"></bean>  
+    <!-- <bean id="cacheManager" class="org.apache.shiro.cache.ehcache.EhCacheManager">  
+	    <property name="cacheManagerConfigFile" value="classpath:ehcache/ehcache.xml" />  
+	</bean>   -->
 
     <!-- 凭证匹配器 -->
     <bean id="credentialsMatcher" class="com.gooday.service.shiro.RetryLimitHashedCredentialsMatcher">
@@ -97,7 +100,7 @@
     </bean>
     
     
-    <bean id="sysUserFilter" class="com.gooday.controller.sys.filter.SysAdminFilter"/>
+    <bean id="sysAdminFilter" class="com.gooday.controller.sys.filter.SysAdminFilter"/>
     <!-- 
     <bean id="aclFilter" class="com.medical.sys.web.filter.ACLFilter"/>
 	-->

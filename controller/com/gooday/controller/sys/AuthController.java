@@ -8,6 +8,7 @@ import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.cache.CacheManager;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,7 +40,7 @@ public class AuthController extends BaseController {
         } else if(LockedAccountException.class.getName().equals(exceptionClassName)) {
             error = "该账户不可用";
         } else if(ExcessiveAttemptsException.class.getName().equals(exceptionClassName)) {
-            error = "该账户已被锁定";
+            error = "该账户已被锁定, 10分钟后再次尝试";
         } else if(exceptionClassName != null) {
             error = "登录错误：" + exceptionClassName;
         }
