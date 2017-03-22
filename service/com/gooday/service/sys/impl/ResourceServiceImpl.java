@@ -1,10 +1,12 @@
 package com.gooday.service.sys.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.gooday.common.model.TreeNode;
 import com.gooday.mapper.resource.ResourceMapper;
 import com.gooday.model.resource.Resource;
 import com.gooday.service.sys.IResourceService;
@@ -32,6 +34,9 @@ public class ResourceServiceImpl implements IResourceService{
 
 	@Override
 	public List<Resource> listUserResource(Long adminId) {
+		List<TreeNode> menus = new ArrayList<TreeNode>();
+		
+		
 		
 		return null;
 	}
