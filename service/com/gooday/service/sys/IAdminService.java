@@ -12,8 +12,8 @@ public interface IAdminService {
 	
 	public Integer saveAdmin(Admin admin) throws Exception;
 	
-	public Set<String> getUserRole(String username);
+	public Set<String> getAdminRole(String username);
 	
-	public Set<String> getUserPermissions(String username);
+	public Set<String> getAdminPermissions(String username);
 	
 }

@@ -7,9 +7,9 @@ import java.io.Serializable;
  */
 public class Resource implements Serializable {
 	
-	public final static Integer TYPE_CATALOG = 0;
-	public final static Integer TYPE_MENU = 1;
-	public final static Integer TYPE_BUTTON = 2;
+	public final static Short TYPE_CATALOG = 0;
+	public final static Short TYPE_MENU = 1;
+	public final static Short TYPE_BUTTON = 2;
 	
     private Long id;
 

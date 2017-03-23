@@ -63,7 +63,7 @@ public class AdminServiceImpl implements IAdminService{
 	}
 
 	@Override
-	public Set<String> getUserRole(String username) {
+	public Set<String> getAdminRole(String username) {
 		Admin admin = adminMapper.selectByUsername(username);
 		Role role = roleMapper.selectByPrimaryKey(admin.getRoleId());
 		
@@ -74,7 +74,7 @@ public class AdminServiceImpl implements IAdminService{
 	}
 
 	@Override
-	public Set<String> getUserPermissions(String username) {
+	public Set<String> getAdminPermissions(String username) {
 		Admin admin = adminMapper.selectByUsername(username);
 		Set<String> permissionNames = new HashSet<String>();
 		

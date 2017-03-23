@@ -35,9 +35,9 @@ public class UserRealm extends AuthorizingRealm {
 		String username = (String)principals.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
         
-        Set<String> permissions = adminService.getUserPermissions(username);
+        Set<String> permissions = adminService.getAdminPermissions(username);
         
-        Set<String> roles = adminService.getUserRole(username);
+        Set<String> roles = adminService.getAdminRole(username);
         
   		authorizationInfo.setRoles(roles);
   		authorizationInfo.setStringPermissions(permissions);

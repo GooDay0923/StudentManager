@@ -186,11 +186,18 @@
     where type = #{type,jdbcType=SMALLINT}
   </select>
   
-  <select id="selectByRoleIdAndType" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+  <select id="selectByRoleIdAndType" resultMap="BaseResultMap">
     SELECT r.id, r.p_id, r.description, r.url, r.permission, r.type, r.icon, r.sort, r.deleted
     FROM resource r
-    INNER JOIN role_resource_map rr ON rr.resource_id = r.id AND rr.role_id = #{role_id}
-    WHERE r.deleted = 0 AND r.type = #{type}
+    INNER JOIN role_resource_map rr ON rr.resource_id = r.id AND rr.role_id = #{role_id,jdbcType=BIGINT}
+    WHERE r.deleted = 0 AND r.type = #{type,jdbcType=SMALLINT}
+  </select>
+  
+  <select id="selectByPId" resultMap="BaseResultMap" parameterType="java.lang.Long">
+  	SELECT 
+    <include refid="Base_Column_List" />
+    FROM resource
+    WHERE p_id = #{pId,jdbcType=BIGINT}
   </select>
   
 </mapper>
