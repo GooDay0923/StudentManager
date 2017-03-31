@@ -1,1 +1,7 @@
 /build/
+/classes/
+/.idea/
+StudentManager.iml
+/.settings/
+/.classpath
+/.project
