@@ -29,9 +29,6 @@ public class AdminServiceImpl implements IAdminService{
 	private RoleMapper roleMapper;
 	
 	@Autowired
-	private RoleResourceMapMapper roleResourceMapMapper;
-	
-	@Autowired
 	private ResourceMapper resourceMapper;
 	
 	@Autowired
