@@ -1,5 +1,7 @@
 package com.gooday.test.service;
 
+import java.util.Set;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,6 +42,14 @@ public class AdminServiceTest {
 		
 		Integer id = adminService.saveAdmin(admin);
 		System.out.println(id.toString());
+	}
+	
+	
+	@Test
+	public void getAdminPermissions() {
+		String username = "admin";
+		Set<String> permission = adminService.getAdminPermissions(username);
+		System.out.println(permission.toString());
 	}
 	
 }

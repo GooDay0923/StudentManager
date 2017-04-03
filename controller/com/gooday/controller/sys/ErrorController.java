@@ -14,7 +14,7 @@ import com.gooday.common.basic.BaseController;
 @RequestMapping("*")
 public class ErrorController extends BaseController {
 
-	@RequestMapping(value = "*")
+	@RequestMapping(value = "/*/*")
 	public String page(HttpServletRequest request, HttpServletResponse response){
 		logger.info("404");
 		

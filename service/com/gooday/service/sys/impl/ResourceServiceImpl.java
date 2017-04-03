@@ -56,6 +56,9 @@ public class ResourceServiceImpl implements IResourceService{
 			
 			//递归获取子目录
 			setResourceChildren(permissions, menu);
+			if(StringUtils.isEmpty(menu.getUrl()) && menu.getChildren().size() == 0){
+				continue;
+			}
 			
 			menus.add(menu);
 		}

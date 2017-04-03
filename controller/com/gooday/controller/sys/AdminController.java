@@ -21,4 +21,6 @@ public class AdminController extends BaseController {
 		return "index";
 	}
 	
+	
+	
 }
