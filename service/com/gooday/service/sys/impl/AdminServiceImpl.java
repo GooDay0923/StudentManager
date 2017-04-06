@@ -96,7 +96,19 @@ public class AdminServiceImpl implements IAdminService{
 		return permissionNames;
 	}
 
-	
-	
+	@Override
+	public List<Admin> listAdmin() {
+		return adminMapper.selectAll();
+	}
+
+	@Override
+	public Admin getAdminById(Long id) {
+		return adminMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Integer deleteAdmin(Long id) {
+		return adminMapper.deleteByPrimaryKey(id);
+	}
 
 }

@@ -147,4 +147,10 @@
       WHERE username = #{username}
   </select>
   
+  <select id='selectAll' resultMap="BaseResultMap" >
+   	  SELECT  
+      <include refid="Base_Column_List" />
+      FROM admin
+  </select>
+  
 </mapper>

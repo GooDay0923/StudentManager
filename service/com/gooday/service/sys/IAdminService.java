@@ -1,5 +1,6 @@
 package com.gooday.service.sys;
 
+import java.util.List;
 import java.util.Set;
 
 import com.gooday.model.admin.Admin;
@@ -15,5 +16,11 @@ public interface IAdminService {
 	public Set<String> getAdminRole(String username);
 	
 	public Set<String> getAdminPermissions(String username);
+	
+	public List<Admin> listAdmin();
+	
+	public Admin getAdminById(Long id);
+	
+	public Integer deleteAdmin(Long id);
 	
 }

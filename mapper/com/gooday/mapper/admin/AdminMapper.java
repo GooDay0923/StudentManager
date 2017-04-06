@@ -1,5 +1,7 @@
 package com.gooday.mapper.admin;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 import com.gooday.model.admin.Admin;
@@ -20,4 +22,6 @@ public interface AdminMapper {
     Admin selectByUsernameAndPassword(@Param("username")String username, @Param("password")String password);
     
     Admin selectByUsername(@Param("username")String username);
+    
+    List<Admin> selectAll();
 }

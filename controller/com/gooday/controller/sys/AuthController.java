@@ -3,12 +3,14 @@ package com.gooday.controller.sys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.ExcessiveAttemptsException;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.LockedAccountException;
 import org.apache.shiro.authc.UnknownAccountException;
 import org.apache.shiro.cache.CacheManager;
+import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gooday.common.basic.BaseController;
 import com.gooday.common.basic.JsonResult;
+import com.gooday.model.admin.Admin;
 import com.gooday.service.sys.IAdminService;
 
 
@@ -28,6 +31,12 @@ public class AuthController extends BaseController {
 	@RequestMapping(value = "/login")
 	public String login(HttpServletRequest request, HttpServletResponse response){
 		logger.info("login");
+		
+		Subject subject = SecurityUtils.getSubject();
+		String username = (String)subject.getPrincipal();
+		if (username != null && !username.equals("")){
+			return "redirect:/";
+		}
 		
 		String exceptionClassName = (String)request.getAttribute("shiroLoginFailure");
         String error = null;
