@@ -1,5 +1,7 @@
 package com.gooday.mapper.role;
 
+import java.util.List;
+
 import com.gooday.model.role.Role;
 
 public interface RoleMapper {
@@ -14,4 +16,6 @@ public interface RoleMapper {
     int updateByPrimaryKeySelective(Role record);
 
     int updateByPrimaryKey(Role record);
+    
+    List<Role> selectAll();
 }

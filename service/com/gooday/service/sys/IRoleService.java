@@ -1,5 +1,7 @@
 package com.gooday.service.sys;
 
+import java.util.List;
+
 import com.gooday.model.role.Role;
 
 public interface IRoleService {
@@ -9,5 +11,7 @@ public interface IRoleService {
 	public void saveRole(Role role);
 	
 	public void removeRoleById(Long id);
+	
+	public List<Role> listAllRole();
 	
 }

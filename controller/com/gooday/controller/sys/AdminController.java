@@ -14,7 +14,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gooday.common.basic.BaseController;
 import com.gooday.common.basic.JsonResult;
 import com.gooday.model.admin.Admin;
+import com.gooday.model.role.Role;
 import com.gooday.service.sys.IAdminService;
+import com.gooday.service.sys.IRoleService;
 
 @Controller
 @RequestMapping("sys/admin")
@@ -22,6 +24,9 @@ public class AdminController extends BaseController {
 
 	@Autowired
 	private IAdminService adminService;
+	
+	@Autowired
+	private IRoleService roleService;
 	
 	@RequestMapping(value = "/list")
 	public String list(HttpServletRequest request, HttpServletResponse response){
@@ -42,7 +47,7 @@ public class AdminController extends BaseController {
 		
 		Admin admin = adminService.getAdminById(id);
 		
-		request.setAttribute("Admin", admin);
+		request.setAttribute("admin", admin);
 		
 		return "admin/view";
 	}
@@ -56,8 +61,19 @@ public class AdminController extends BaseController {
 		return "admin/edit";
 	}
 	
-	@RequestMapping(value = "/save")
-	public JsonResult save(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	@RequestMapping(value = "/addVM")
+	public String save(HttpServletRequest request, HttpServletResponse response) throws Exception{
+		logger.info("addVM");
+		
+		List<Role> roleList = roleService.listAllRole();
+		
+		request.setAttribute("roleList", roleList);
+		
+		return "admin/add";
+	}
+	
+	@RequestMapping(value = "/add")
+	public JsonResult add(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		logger.info("edit");
 		
 		Admin admin = new Admin();
