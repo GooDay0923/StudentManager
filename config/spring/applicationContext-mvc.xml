@@ -62,18 +62,18 @@
     </bean>  
     
     <!-- 异常解析 -->
-    <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
+    <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
         <property name="defaultErrorView" value="/template/error/404.html" />
-        <!-- <property name="exceptionMappings">
+        <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.SQLException">/template/error/404</prop>
                 <prop key="java.lang.Exception">/template/error/404</prop>
                 <prop key="java.lang.RuntimeException">/template/error/404</prop>
             </props>
-        </property> -->
-        <!-- 设置日志输出级别，不定义则默认不输出警告等错误日志信息 -->
+        </property>
+        设置日志输出级别，不定义则默认不输出警告等错误日志信息
         <property name="warnLogCategory" value="WARN"></property>
-    </bean>
+    </bean> -->
 
     <!-- 当在web.xml 中   DispatcherServlet使用 <url-pattern>/</url-pattern> 映射时，能映射静态资源 -->
 	<mvc:default-servlet-handler />

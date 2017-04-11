@@ -9,10 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gooday.common.basic.BaseController;
 import com.gooday.common.basic.JsonResult;
+import com.gooday.common.util.DateUtil;
 import com.gooday.model.admin.Admin;
 import com.gooday.model.role.Role;
 import com.gooday.service.sys.IAdminService;
@@ -62,7 +65,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/addVM")
-	public String save(HttpServletRequest request, HttpServletResponse response) throws Exception{
+	public String addVM(HttpServletRequest request, HttpServletResponse response){
 		logger.info("addVM");
 		
 		List<Role> roleList = roleService.listAllRole();
@@ -73,14 +76,34 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/add")
+	@ResponseBody
 	public JsonResult add(HttpServletRequest request, HttpServletResponse response) throws Exception{
-		logger.info("edit");
-		
-		Admin admin = new Admin();
-		
-		Integer result = adminService.saveAdmin(admin);
+		logger.info("add");
 		
 		JsonResult jsonResult = new JsonResult();
+		
+		try{
+			
+			String username = request.getParameter("username");
+			String password = request.getParameter("password");
+			Long roleId = Long.valueOf(request.getParameter("roleId"));
+			
+			Integer currentTime = DateUtil.getCurrentUnixTime();
+			
+			Admin admin = new Admin();
+			admin.setUsername(username);
+			admin.setPassword(password);
+			admin.setEnable(true);
+			admin.setRoleId(roleId);
+			admin.setGmtCreate(currentTime);
+			admin.setGmtModified(currentTime);
+		
+			Integer result = adminService.saveAdmin(admin);
+			
+		} catch(Exception e) {
+			jsonResult.setCode("-123");
+			jsonResult.setMessage(e.getMessage());
+		}
 		
 		return jsonResult;
 	}
