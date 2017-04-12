@@ -39,7 +39,7 @@ public class AdminController extends BaseController {
 		
 		request.setAttribute("adminList", adminList);
 		
-		return "admin/list";
+		return "sys/admin/list";
 	}
 	
 	@RequestMapping(value = "/view")
@@ -52,7 +52,7 @@ public class AdminController extends BaseController {
 		
 		request.setAttribute("admin", admin);
 		
-		return "admin/view";
+		return "sys/admin/view";
 	}
 	
 	@RequestMapping(value = "/edit")
@@ -61,7 +61,7 @@ public class AdminController extends BaseController {
 		
 		
 		
-		return "admin/edit";
+		return "sys/admin/edit";
 	}
 	
 	@RequestMapping(value = "/addVM")
@@ -72,7 +72,7 @@ public class AdminController extends BaseController {
 		
 		request.setAttribute("roleList", roleList);
 		
-		return "admin/add";
+		return "sys/admin/add";
 	}
 	
 	@RequestMapping(value = "/add")

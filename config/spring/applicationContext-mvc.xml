@@ -63,7 +63,7 @@
     
     <!-- 异常解析 -->
     <!-- <bean class="org.springframework.web.servlet.handler.SimpleMappingExceptionResolver">  
-        <property name="defaultErrorView" value="/template/error/404.html" />
+        <property name="defaultErrorView" value="/template/error/505.html" />
         <property name="exceptionMappings">
             <props>
                 <prop key="java.lang.SQLException">/template/error/404</prop>

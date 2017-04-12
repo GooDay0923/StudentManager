@@ -125,8 +125,8 @@
                 /static/** = anon
                 /auth/login = authc
                 /auth/logout = logout
-                <!-- /** = user, sysAdmin -->
-                /** = anon
+                /** = user, sysAdmin
+                <!-- /** = anon -->
             </value>
         </property>
     </bean>
