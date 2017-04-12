@@ -79,11 +79,11 @@
 								<div class="am-btn-group am-btn-group-xs">
 									<button
 										class="am-btn am-btn-default am-btn-xs am-text-secondary">
-										<span class="am-icon-pencil-square-o"></span> 编辑
+										<span class="am-icon-pencil-square-o" onclick="editAdmin('${admin}');"></span> 编辑
 									</button>
 									<button
 										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
-										<span class="am-icon-trash-o"></span> 删除
+										<span class="am-icon-trash-o" onclick="deleteAdmin('${admin}');"></span> 删除
 									</button>
 								</div>
 							</div>
@@ -121,4 +121,20 @@ $(function(){
 	});
 	
 })
+
+function editAdmin(id){
+	window.location.href = '${rc.contextPath}/sys/admin/edit?id='id;
+}
+
+function deleteAdmin(id){
+	var url = '${rc.contextPath}/sys/admin/delete';
+	
+	$.post(url, {id : id})
+	.done(function(result){
+		
+	})
+	.fail(function(result){
+		
+	});
+}
 </script>

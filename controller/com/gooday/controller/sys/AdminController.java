@@ -60,7 +60,6 @@ public class AdminController extends BaseController {
 		logger.info("edit");
 		
 		
-		
 		return "sys/admin/edit";
 	}
 	
