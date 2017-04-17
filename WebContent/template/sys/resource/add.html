@@ -75,14 +75,14 @@
 				
 				var data = {}, url = "${rc.contextPath}/sys/admin/add";
 				
-				
 				$("input").each(function(i, n){
 					var that = $(this);
 					var attrName = that.attr("id");
 					data[attrName] = that.val();
 				});
 				
-				data["roleId"] = 1;
+				
+				data["roleId"] = $("select:checked").val();
 				
 				$.post(url, data)
 				.done(function(result){

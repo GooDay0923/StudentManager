@@ -107,8 +107,8 @@ public class AdminServiceImpl implements IAdminService{
 	}
 
 	@Override
-	public Integer deleteAdmin(Long id) {
-		return adminMapper.deleteByPrimaryKey(id);
+	public Integer updateAdmin(Admin admin) {
+		return adminMapper.updateByPrimaryKeySelective(admin);
 	}
 
 }

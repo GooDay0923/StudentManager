@@ -21,6 +21,6 @@ public interface IAdminService {
 	
 	public Admin getAdminById(Long id);
 	
-	public Integer deleteAdmin(Long id);
+	public Integer updateAdmin(Admin admin);
 	
 }

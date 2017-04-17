@@ -58,7 +58,7 @@ public class UserRealm extends AuthorizingRealm {
 		
 		if(Boolean.FALSE.equals(admin.getEnable())) {  
             throw new LockedAccountException(); //帐号锁定  
-        }  
+        }
 		
 		SimpleAuthenticationInfo authenticationInfo = new SimpleAuthenticationInfo(  
 	                admin.getUsername(), //用户名  

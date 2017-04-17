@@ -107,15 +107,19 @@ public class AdminController extends BaseController {
 		return jsonResult;
 	}
 	
-	@RequestMapping(value = "/delete")
+	@RequestMapping(value = "/remove")
 	public JsonResult delete(HttpServletRequest request, HttpServletResponse response){
-		logger.info("delete");
-		
-		Long id = Long.valueOf(request.getParameter("id"));
+		logger.info("remove");
 		
 		JsonResult jsonResult = new JsonResult();
 		
-		adminService.deleteAdmin(id);
+		Long id = Long.valueOf(request.getParameter("id"));
+		
+		Admin admin = new Admin();
+		admin.setId(id);
+		admin.setEnable(false);
+		
+		Integer result = adminService.updateAdmin(admin);
 		
 		return jsonResult;
 	}

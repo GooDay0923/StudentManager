@@ -150,7 +150,7 @@
   <select id='selectAll' resultMap="BaseResultMap" >
    	  SELECT  
       <include refid="Base_Column_List" />
-      FROM admin
+      FROM admin WHERE enable = '1'
   </select>
   
 </mapper>
