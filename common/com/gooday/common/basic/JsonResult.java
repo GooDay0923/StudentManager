@@ -1,6 +1,10 @@
 package com.gooday.common.basic;
 
 public class JsonResult {
+
+	public static final String OP_SUCCESS = "1";
+
+	public static final String OP_ERROR = "-1";
 	
 	private String code;
 	

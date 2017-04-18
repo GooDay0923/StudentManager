@@ -87,7 +87,8 @@
 				$.post(url, data)
 				.done(function(result){
 					if(result.code == 1){
-						
+//						alert('成功');
+						window.location.href = '${rc.contextPath}/sys/admin/list';
 					} else {
 						alert(result.message);
 					}

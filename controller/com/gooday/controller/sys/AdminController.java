@@ -98,9 +98,12 @@ public class AdminController extends BaseController {
 			admin.setGmtModified(currentTime);
 		
 			Integer result = adminService.saveAdmin(admin);
-			
+			if(result.equals(1)){
+				jsonResult.setCode(JsonResult.OP_SUCCESS);
+			}
+
 		} catch(Exception e) {
-			jsonResult.setCode("-123");
+			jsonResult.setCode(JsonResult.OP_ERROR);
 			jsonResult.setMessage(e.getMessage());
 		}
 		

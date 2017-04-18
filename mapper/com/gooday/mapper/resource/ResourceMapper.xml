@@ -32,10 +32,10 @@
     where id = #{id,jdbcType=BIGINT}
   </delete>
   
-  <insert id="insert" parameterType="com.gooday.model.resource.Resource">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insert" parameterType="com.gooday.model.resource.Resource" useGeneratedKeys="true" keyProperty="id">
+    <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
-    </selectKey>
+    </selectKey>-->
     insert into resource (p_id, name, description, 
       url, permission, type, icon, sort, 
       deleted, gmt_create, gmt_modified
@@ -46,10 +46,10 @@
       )
   </insert>
   
-  <insert id="insertSelective" parameterType="com.gooday.model.resource.Resource">
-    <selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
+  <insert id="insertSelective" parameterType="com.gooday.model.resource.Resource" useGeneratedKeys="true" keyProperty="id">
+    <!--<selectKey keyProperty="id" order="AFTER" resultType="java.lang.Long">
       SELECT LAST_INSERT_ID()
-    </selectKey>
+    </selectKey>-->
     insert into resource
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="pId != null">
