@@ -42,7 +42,7 @@
 	
 	<div class="am-u-sm-12 am-u-md-3">
 		<div class="am-input-group am-input-group-sm">
-			<input type="text" class="am-form-field" placeholder='用户名'>
+			<input type="text" class="am-form-field" placeholder='用户名' value="${username}">
 				<span class="am-input-group-btn">
 				<button class="am-btn am-btn-default" type="button">搜索</button>
 				</span>
@@ -66,14 +66,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<#list adminList as admin>
+				<#list pageInfo.list as admin>
 					<tr>
 						<!-- <td><input type="checkbox" /></td> -->
 						<td>${admin.username}</td>
 						<td>${admin.username}</td>
 						<td>${admin.enable}</td>
-						<td>${.now?date}</td>
-						<td>${admin.gmtModified?string("yyyy-MM-dd HH:mm:ss")}</td>
+						<td>${admin.gmtCreated}</td>
+						<td>${admin.gmtModified}</td>
 						<td>
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
@@ -89,21 +89,21 @@
 							</div>
 						</td>
 					</tr>
-					</#list>
+				</#list>
 				</tbody>
 			</table>
 			
 			<div class="am-cf">
-				共 15 条记录
+                显示第 ${pageInfo.startRow} 至 ${pageInfo.endRow} 项结果,共 ${pageInfo.total} 条记录
 				<div class="am-fr">
 					<ul class="am-pagination">
-						<li class="am-disabled"><a href="#">«</a></li>
+						<li><a href="${pageInfo.firstPage}">«</a></li>
 						<li class="am-active"><a href="#">1</a></li>
 						<li><a href="#">2</a></li>
 						<li><a href="#">3</a></li>
 						<li><a href="#">4</a></li>
 						<li><a href="#">5</a></li>
-						<li><a href="#">»</a></li>
+						<li><a href="${pageInfo.isLastPage}">»</a></li>
 					</ul>
 				</div>
 			</div>

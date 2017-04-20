@@ -17,7 +17,7 @@ public interface IAdminService {
 	
 	public Set<String> getAdminPermissions(String username);
 	
-	public List<Admin> listAdmin();
+	public List<Admin> listAdminByUserName(String username, int page, int rows);
 	
 	public Admin getAdminById(Long id);
 	

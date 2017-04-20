@@ -147,10 +147,13 @@
       WHERE username = #{username}
   </select>
   
-  <select id='selectAll' resultMap="BaseResultMap" >
+  <select id='selectAllByUsername' resultMap="BaseResultMap" parameterType="java.lang.String" >
    	  SELECT  
       <include refid="Base_Column_List" />
       FROM admin WHERE enable = '1'
+      <if test="username != null and username != ''">
+        AND username LIKE #{username,jdbcType=VARCHAR}"%"
+      </if>
   </select>
   
 </mapper>

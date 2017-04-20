@@ -5,12 +5,14 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.pagehelper.PageInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.gooday.common.basic.BaseController;
@@ -32,12 +34,19 @@ public class AdminController extends BaseController {
 	private IRoleService roleService;
 	
 	@RequestMapping(value = "/list")
-	public String list(HttpServletRequest request, HttpServletResponse response){
+	public String list(HttpServletRequest request, HttpServletResponse response,
+					   @RequestParam(required = false, defaultValue = "1") int page,
+					   @RequestParam(required = false, defaultValue = "10") int rows){
 		logger.info("index");
-		
-		List<Admin> adminList = adminService.listAdmin();
-		
-		request.setAttribute("adminList", adminList);
+
+		String username = request.getParameter("username");
+
+		List<Admin> adminList = adminService.listAdminByUserName(username, page, rows);
+
+		request.setAttribute("pageInfo", new PageInfo<Admin>(adminList));
+		request.setAttribute("username", username);
+		request.setAttribute("page", page);
+		request.setAttribute("rows", rows);
 		
 		return "sys/admin/list";
 	}

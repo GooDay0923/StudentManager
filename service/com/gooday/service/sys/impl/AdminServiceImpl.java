@@ -4,6 +4,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import com.github.pagehelper.PageHelper;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -97,8 +98,9 @@ public class AdminServiceImpl implements IAdminService{
 	}
 
 	@Override
-	public List<Admin> listAdmin() {
-		return adminMapper.selectAll();
+	public List<Admin> listAdminByUserName(String username, int page, int rows) {
+		PageHelper.startPage(page, rows);
+		return adminMapper.selectAllByUsername(username);
 	}
 
 	@Override

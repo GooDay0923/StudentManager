@@ -23,5 +23,5 @@ public interface AdminMapper {
     
     Admin selectByUsername(@Param("username")String username);
     
-    List<Admin> selectAll();
+    List<Admin> selectAllByUsername(@Param("username")String username);
 }

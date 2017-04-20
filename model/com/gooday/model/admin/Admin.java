@@ -99,7 +99,7 @@ public class Admin implements Serializable {
 
     public void setGmtCreate(Integer gmtCreate) {
         this.gmtCreate = gmtCreate;
-    }
+     }
 
     public Integer getGmtModified() {
         return gmtModified;

@@ -1,5 +1,6 @@
 package com.gooday.test.service;
 
+import java.util.List;
 import java.util.Set;
 
 import org.junit.Test;
@@ -34,14 +35,15 @@ public class AdminServiceTest {
 	@Test
 	public void saveAdmin() throws Exception {
 		Admin admin = new Admin();
-		admin.setUsername("admin");
-		admin.setPassword("123456");
+		admin.setUsername("nn");
+		admin.setPassword("nn");
 		admin.setEnable(true);
-		admin.setGmtCreate((int)System.currentTimeMillis() / 1000);
-		admin.setGmtModified((int)System.currentTimeMillis() / 1000);
+		admin.setGmtCreate(Math.toIntExact(System.currentTimeMillis() / 1000));
+		admin.setGmtModified(Math.toIntExact(System.currentTimeMillis() / 1000));
 		
 		Integer id = adminService.saveAdmin(admin);
-		System.out.println(id.toString());
+		System.out.println(id);
+		System.out.println(admin.getId());
 	}
 	
 	
@@ -51,5 +53,12 @@ public class AdminServiceTest {
 		Set<String> permission = adminService.getAdminPermissions(username);
 		System.out.println(permission.toString());
 	}
+
+	@Test
+    public void listAdminByUserName(){
+        String username = "a";
+        List<Admin> adminList = adminService.listAdminByUserName(username, 1, 2);
+        System.out.println(adminList);
+    }
 	
 }
