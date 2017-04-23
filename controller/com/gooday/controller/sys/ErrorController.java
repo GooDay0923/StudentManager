@@ -10,15 +10,15 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gooday.common.basic.BaseController;
 
-@Controller
-@RequestMapping("*")
+//@Controller
+//@RequestMapping("*")
 public class ErrorController extends BaseController {
 
-	@RequestMapping(value = "/*/*")
-	public String page(HttpServletRequest request, HttpServletResponse response){
-		logger.info("404");
-		
-		return "error/404";
-	}
+//	@RequestMapping(value = "/*/*")
+//	public String page(HttpServletRequest request, HttpServletResponse response){
+//		logger.info("404");
+//
+//		return "error/404";
+//	}
 		
 }
