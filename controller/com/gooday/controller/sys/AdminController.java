@@ -37,7 +37,7 @@ public class AdminController extends BaseController {
 	public String list(HttpServletRequest request, HttpServletResponse response,
 					   @RequestParam(required = false, defaultValue = "1") int page,
 					   @RequestParam(required = false, defaultValue = "10") int rows){
-		logger.info("index");
+		logger.info("list");
 
 		String username = request.getParameter("username");
 

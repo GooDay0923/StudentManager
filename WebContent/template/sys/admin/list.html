@@ -42,9 +42,9 @@
 	
 	<div class="am-u-sm-12 am-u-md-3">
 		<div class="am-input-group am-input-group-sm">
-			<input type="text" class="am-form-field" placeholder='用户名' value="${username}">
+			<input type="text" class="am-form-field" placeholder='用户名' id="username" name="username" value="${username}">
 				<span class="am-input-group-btn">
-				<button class="am-btn am-btn-default" type="button">搜索</button>
+				<button class="am-btn am-btn-default" type="button" id="search">搜索</button>
 				</span>
 		</div>
 	</div>
@@ -92,18 +92,24 @@
 				</#list>
 				</tbody>
 			</table>
-			
+
 			<div class="am-cf">
                 显示第 ${pageInfo.startRow} 至 ${pageInfo.endRow} 项结果,共 ${pageInfo.total} 条记录
 				<div class="am-fr">
 					<ul class="am-pagination">
-						<li><a href="${pageInfo.firstPage}">«</a></li>
-						<li class="am-active"><a href="#">1</a></li>
-						<li><a href="#">2</a></li>
-						<li><a href="#">3</a></li>
-						<li><a href="#">4</a></li>
-						<li><a href="#">5</a></li>
-						<li><a href="${pageInfo.isLastPage}">»</a></li>
+						<#if pageInfo.isFirstPage != true>
+							<li><a href="javascript:void(0);">«</a></li>
+						</#if>
+						<#if pageInfo.hasPreviousPage == true>
+							<li><a href="javascript:void(0);">${pageInfo.pageNum - 1}</a></li>
+						</#if>
+						<li class="am-active"><a href="#">${pageInfo.pageNum}</a></li>
+						<#if pageInfo.hasNextPage == true>
+							<li><a href="javascript:void(0);">${pageInfo.pageNum + 1}</a></li>
+						</#if>
+						<#if pageInfo.isLastPage != true>
+							<li><a href="javascript:void(0);">»</a></li>
+						</#if>
 					</ul>
 				</div>
 			</div>
@@ -119,6 +125,17 @@ $(function(){
 	$("#add").click(function(){
 		window.location.href = '${rc.contextPath}/sys/admin/addVM';
 	});
-	
+
+    $(".am-pagination a").click(function(){
+        var page = $(this).text();
+        var username = $('#username').val();
+        window.location.href = '${rc.contextPath}/sys/admin/list?page=' + page + '&username=' + username;
+    });
+
+    $('#search').click(function(){
+        var username = $('#username').val();
+        window.location.href = '${rc.contextPath}/sys/admin/list?username=' + username;
+    });
+
 })
 </script>

@@ -63,7 +63,7 @@
   <!-- 错误页面 -->
   <error-page>
       <error-code>404</error-code>
-      <location>/template/error/404_bak.jsp</location>
+      <location>/template/error/404.jsp</location>
   </error-page>
   <!--
   <error-page>
