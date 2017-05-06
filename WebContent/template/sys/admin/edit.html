@@ -1,0 +1,128 @@
+<#-- 引入布局指令的命名空间 --> 
+<#import "/common/layout.html" as defaultLayout>
+
+<#-- 调用布局指令 --> 
+<@defaultLayout.layout>
+
+<div class="am-cf am-padding am-padding-bottom-0">
+	<div class="am-fl am-cf">
+		<strong class="am-text-primary am-text-lg">管理员列表</strong> / <small>增加</small>
+	</div>
+</div>
+
+<hr>
+
+<form class="am-form am-form-horizontal">
+	<div class="am-form-group">
+		<label for="username" class="am-u-sm-2 am-form-label">用户名</label>
+		<div class="am-u-sm-10">
+			<input type="text" disabled id="username" placeholder="输入你的用户名" value="${admin.username}">
+		</div>
+	</div>
+
+	<div class="am-form-group">
+		<label for="password" class="am-u-sm-2 am-form-label">密码</label>
+		<div class="am-u-sm-10">
+			<input type="password" id="password" placeholder="设置一个密码吧">
+		</div>
+	</div>
+
+	<div class="am-form-group">
+		<label for="repassword" class="am-u-sm-2 am-form-label">确认密码</label>
+		<div class="am-u-sm-10">
+			<input type="password" id="repassword" placeholder="请输入上次的密码吧">
+		</div>
+	</div>
+
+	<div class="am-form-group">
+		<label for="role" class="am-u-sm-2 am-form-label">角色</label>
+		<div class="am-u-sm-10">
+			<select id="role"> <#list roleList as role>
+				<option value="${role.id}">${role.name}</option> </#list>
+			</select>
+		</div>
+	</div>
+
+	<div class="am-form-group">
+		<div class="am-u-sm-10 am-u-sm-offset-2">
+			<button type="button" class="am-btn am-btn-primary am-btn-xs"
+				id="submit">提交保存</button>
+			<button type="button" class="am-btn am-btn-primary am-btn-xs"
+				id="goback">放弃保存</button>
+		</div>
+	</div>
+</form>
+
+</@defaultLayout.layout>
+<script>
+	$(function() {
+
+		$("#submit").click(function() {
+			admin.submit();
+		});
+
+		$("#goback").click(function() {
+			admin.goback();
+		});
+
+	});
+
+	var admin = (function() {
+
+		return {
+
+			submit : function() {
+				
+				var data = {}, url = "${rc.contextPath}/sys/admin/add";
+				
+				
+				$("form input").each(function(i, n){
+					var that = $(this);
+					var attrName = that.attr("id");
+					data[attrName] = that.val();
+				});
+				
+				data["roleId"] = 1;
+				
+				$.post(url, data)
+				.done(function(result){
+					if(result.code == 1){
+//						alert('成功');
+						window.location.href = '${rc.contextPath}/sys/admin/list';
+					} else {
+						alert(result.message);
+					}
+				})
+				.fail(function(result){
+					alert(result.message);
+				})
+				
+			},
+
+			checkPassword : function() {
+				var password = $("#password").val();
+				var repassword = $("#password").val();
+				if (password != repassword) {
+
+				}
+			},
+
+			checkUsername : function() {
+				var username = $("#username").val();
+				var url = '';
+				var data = {
+					username : username
+				};
+				$.post(url, data, function() {
+					
+				}).then();
+			},
+
+			goback : function() {
+				window.history.go(-1);
+			},
+
+		}
+
+	})();
+</script>

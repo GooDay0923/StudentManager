@@ -6,6 +6,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.github.pagehelper.PageInfo;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,14 +36,27 @@ public class AdminController extends BaseController {
 	private IRoleService roleService;
 	
 	@RequestMapping(value = "/list")
+//	@RequiresPermissions("sys:config:list")
 	public String list(HttpServletRequest request, HttpServletResponse response,
-					   @RequestParam(required = false, defaultValue = "1") int page,
-					   @RequestParam(required = false, defaultValue = "10") int rows){
+					   @RequestParam(required = false, defaultValue = "1") String page,
+					   @RequestParam(required = false, defaultValue = "10") String rows){
 		logger.info("list");
+
+		int sqlPage = 1;
+		int sqlRows = 10;
 
 		String username = request.getParameter("username");
 
-		List<Admin> adminList = adminService.listAdminByUserName(username, page, rows);
+		if(StringUtils.isNumeric(page)){
+			sqlPage =  Integer.parseInt(page);
+		}
+
+		if(StringUtils.isNumeric(page)){
+			sqlRows =  Integer.parseInt(rows);
+		}
+
+
+		List<Admin> adminList = adminService.listAdminByUserName(username, sqlPage, sqlRows);
 
 		request.setAttribute("pageInfo", new PageInfo<Admin>(adminList));
 		request.setAttribute("username", username);
@@ -64,11 +79,29 @@ public class AdminController extends BaseController {
 		return "sys/admin/view";
 	}
 	
+	@RequestMapping(value = "/editVM")
+	public String editVM(HttpServletRequest request, HttpServletResponse response){
+		logger.info("edit");
+
+		Long id = Long.valueOf(request.getParameter("id"));
+
+		Admin admin = adminService.getAdminById(id);
+
+		request.setAttribute("admin", admin);
+
+		return "sys/admin/edit";
+	}
+
 	@RequestMapping(value = "/edit")
 	public String edit(HttpServletRequest request, HttpServletResponse response){
 		logger.info("edit");
-		
-		
+
+		Long id = Long.valueOf(request.getParameter("id"));
+
+		Admin admin = adminService.getAdminById(id);
+
+		request.setAttribute("admin", admin);
+
 		return "sys/admin/edit";
 	}
 	
@@ -91,7 +124,6 @@ public class AdminController extends BaseController {
 		JsonResult jsonResult = new JsonResult();
 		
 		try{
-			
 			String username = request.getParameter("username");
 			String password = request.getParameter("password");
 			Long roleId = Long.valueOf(request.getParameter("roleId"));

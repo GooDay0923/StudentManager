@@ -20,9 +20,6 @@
 				<button type="button" class="am-btn am-btn-default" id='add'>
 					<span class="am-icon-plus"></span> 新增
 				</button>
-				<!-- <button type="button" class="am-btn am-btn-default">
-					<span class="am-icon-trash-o"></span> 删除
-				</button> -->
 			</div>
 		</div>
 	</div>
@@ -53,6 +50,7 @@
 <div class="am-g">
 	<div class="am-u-sm-12">
 		<form class="am-form">
+            <#if pageInfo.list?? && (pageInfo.list?size > 0)>
 			<table class="am-table am-table-striped am-table-hover table-main">
 				<thead>
 					<tr>
@@ -66,6 +64,7 @@
 					</tr>
 				</thead>
 				<tbody>
+
 				<#list pageInfo.list as admin>
 					<tr>
 						<!-- <td><input type="checkbox" /></td> -->
@@ -77,12 +76,12 @@
 						<td>
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
-									<button
-										class="am-btn am-btn-default am-btn-xs am-text-secondary">
+									<button type="button"
+										class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit(${admin.Id});">
 										<span class="am-icon-pencil-square-o"></span> 编辑
 									</button>
-									<button
-										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+									<button type="button"
+										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="delete(${admin.Id});">
 										<span class="am-icon-trash-o"></span> 删除
 									</button>
 								</div>
@@ -113,6 +112,15 @@
 					</ul>
 				</div>
 			</div>
+
+            <#else>
+                <table class="am-table am-table-striped am-table-hover table-main" >
+                    <tbody style="text-align:center;">
+                        <tr><td>暂无数据</td></tr>
+                    </tbody>
+                </table>
+			</#if>
+
 		</form>
 	</div>
 
@@ -132,10 +140,23 @@ $(function(){
         window.location.href = '${rc.contextPath}/sys/admin/list?page=' + page + '&username=' + username;
     });
 
-    $('#search').click(function(){
+    $("#search").click(function(){
         var username = $('#username').val();
         window.location.href = '${rc.contextPath}/sys/admin/list?username=' + username;
     });
 
-})
+});
+
+
+    function edit(id){
+        window.location.href = '${rc.contextPath}/sys/admin/editVM?id=' + id;
+    }
+
+    function remove(id){
+        if(confirm("确认要删除吗？")){
+            window.location.href = '${rc.contextPath}/sys/admin/remove?id=' + id;
+        }
+    }
+
+
 </script>
