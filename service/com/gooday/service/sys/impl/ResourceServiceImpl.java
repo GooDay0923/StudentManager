@@ -118,8 +118,21 @@ public class ResourceServiceImpl implements IResourceService{
 	}
 
 	@Override
-	public List<Resource> listAllResource() {
-		// TODO Auto-generated method stub
+	public List<TreeNode> listAllResource() {
+
+		List<TreeNode> menus = new ArrayList<TreeNode>();
+
+		List<Resource> resourceList = resourceMapper.selectByPId(0L);
+
+		for(Resource resource :resourceList){
+			//如果不是菜单则跳过
+			if(!resource.getType().equals(Resource.TYPE_MENU)){
+				continue;
+			}
+
+
+		}
+
 		return null;
 	}
 

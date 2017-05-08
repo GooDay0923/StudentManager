@@ -87,6 +87,9 @@ public class AdminController extends BaseController {
 
 		Admin admin = adminService.getAdminById(id);
 
+		List<Role> roleList = roleService.listAllRole();
+
+		request.setAttribute("roleList", roleList);
 		request.setAttribute("admin", admin);
 
 		return "sys/admin/edit";
@@ -97,8 +100,13 @@ public class AdminController extends BaseController {
 		logger.info("edit");
 
 		Long id = Long.valueOf(request.getParameter("id"));
+		String password = request.getParameter("password");
+		Long roleId = Long.valueOf(request.getParameter("role_id"));
 
-		Admin admin = adminService.getAdminById(id);
+		Admin admin = new Admin();
+		admin.setId(id);
+		admin.setPassword(password);
+		admin.setRoleId(roleId);
 
 		request.setAttribute("admin", admin);
 

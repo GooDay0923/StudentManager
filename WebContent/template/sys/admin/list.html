@@ -69,7 +69,7 @@
 					<tr>
 						<!-- <td><input type="checkbox" /></td> -->
 						<td>${admin.username}</td>
-						<td>${admin.username}</td>
+						<td>${admin.role}</td>
 						<td>${admin.enable}</td>
 						<td>${admin.gmtCreated}</td>
 						<td>${admin.gmtModified}</td>
@@ -77,11 +77,11 @@
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
 									<button type="button"
-										class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit(${admin.Id});">
+										class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit(${admin.id});">
 										<span class="am-icon-pencil-square-o"></span> 编辑
 									</button>
 									<button type="button"
-										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="delete(${admin.Id});">
+										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="delete(${admin.id});">
 										<span class="am-icon-trash-o"></span> 删除
 									</button>
 								</div>

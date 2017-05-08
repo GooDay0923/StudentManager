@@ -3,6 +3,9 @@ package com.gooday.controller.sys;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.github.pagehelper.PageInfo;
+import com.gooday.common.model.TreeNode;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -10,6 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.gooday.common.basic.BaseController;
 import com.gooday.model.resource.Resource;
 import com.gooday.service.sys.IResourceService;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 @Controller
 @RequestMapping("sys/resource")
@@ -20,10 +26,12 @@ public class ResourceController extends BaseController {
 	
 	@RequestMapping(value = "/list")
 	public String list(HttpServletRequest request, HttpServletResponse response){
-		logger.info("index");
-		
-		
-		
+		logger.info("list");
+
+		List<TreeNode> resourceList = resourceService.listAllResource();
+
+		request.setAttribute("resourceList", resourceList);
+
 		return "sys/resource/list";
 	}
 	
