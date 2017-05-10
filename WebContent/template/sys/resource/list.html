@@ -1,4 +1,4 @@
-<#-- 引入布局指令的命名空间 --> 
+<#-- 引入布局指令的命名空间 -->
 <#import "/common/layout.html" as defaultLayout>
 
 <#-- 调用布局指令 --> 
@@ -15,19 +15,84 @@
 
 <div class="am-g">
 
+
 </div>
 
 <div class="am-g">
 	<div class="am-u-sm-12">
-
+		<ul class="am-tree" id="firstTree">
+			<li class="am-tree-branch am-hide" data-template="treebranch">
+				<div class="am-tree-branch-header">
+					<button class="am-tree-branch-name">
+						<span class="am-tree-icon am-tree-icon-folder"></span>
+						<span class="am-tree-label"></span>
+					</button>
+				</div>
+				<ul class="am-tree-branch-children"></ul>
+				<div class="am-tree-loader"><span class="am-icon-spin am-icon-spinner"></span></div>
+			</li>
+			<li class="am-tree-item am-hide" data-template="treeitem">
+				<button class="am-tree-item-name">
+					<span class="am-tree-icon am-tree-icon-item"></span>
+					<span class="am-tree-label"></span>
+				</button>
+			</li>
+		</ul>
 	</div>
 </div>
 
-</@defaultLayout.layout>
-<script src="${rc.contextPath}/static/plugins/tree/amazeui.tree.min.js"></script>
-<script>
-$(function(){
-	
 
-})
+
+</@defaultLayout.layout>
+
+
+<script>
+
+	$(function() {
+
+		var data = [
+			{
+				title: '苹果公司',
+				type: 'folder',
+				products: [
+					{
+						title: 'iPhone',
+						type: 'item'
+					},
+					{
+						title: 'iMac',
+						type: 'item'
+					},
+					{
+						title: 'MacBook Pro',
+						type: 'item'
+					}
+				]
+			},
+			{
+				title: '微软公司',
+				type: 'item'
+			},
+			{
+				title: 'GitHub',
+				type: 'item',
+				attr: {
+					icon: 'am-icon-github'
+				}
+			}
+		];
+
+		$('#firstTree').tree({
+			dataSource: function(options, callback) {
+				// 模拟异步加载
+				setTimeout(function() {
+					callback({data: options.products || data});
+				}, 400);
+			},
+			multiSelect: false,
+			cacheItems: true,
+			folderSelect: false
+		});
+	});
+
 </script>
