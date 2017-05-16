@@ -7,7 +7,7 @@
 
 <div class="am-cf am-padding am-padding-bottom-0">
 	<div class="am-fl am-cf">
-		<strong class="am-text-primary am-text-lg">系统管理</strong> / <small>管理员列表</small>
+		<strong class="am-text-primary am-text-lg">系统管理</strong> / <small>角色管理</small>
 	</div>
 </div>
 
@@ -53,13 +53,13 @@
 <div class="am-g">
 	<div class="am-u-sm-12">
 		<form class="am-form">
+			<#if pageInfo.list?? && (pageInfo.list?size > 0)>
 			<table class="am-table am-table-striped am-table-hover table-main">
 				<thead>
 					<tr>
 						<!-- <th class="table-check"><input type="checkbox" /></th> -->
-						<th class="table-username">用户名</th>
-						<th class="table-role">角色</th>
-						<th class="table-enable">启用状态</th>
+						<th class="table-username">角色名</th>
+						<th class="table-role">备注</th>
 						<th class="table-author am-hide-sm-only">创建时间</th>
 						<th class="table-date am-hide-sm-only">修改时间</th>
 						<th class="table-set">操作</th>
@@ -69,9 +69,8 @@
 					<#list adminList as admin>
 					<tr>
 						<!-- <td><input type="checkbox" /></td> -->
-						<td>${admin.username}</td>
-						<td>${admin.username}</td>
-						<td>${admin.enable}</td>
+						<td>${role.name}</td>
+						<td>${role.remark}</td>
 						<td>${.now?date}</td>
 						<td>${admin.gmtModified?string("yyyy-MM-dd HH:mm:ss")}</td>
 						<td>
@@ -107,6 +106,15 @@
 					</ul>
 				</div>
 			</div>
+
+			<#else>
+				<table class="am-table am-table-striped am-table-hover table-main" >
+					<tbody style="text-align:center;">
+					<tr><td>暂无数据</td></tr>
+					</tbody>
+				</table>
+			</#if>
+
 		</form>
 	</div>
 
@@ -115,9 +123,20 @@
 </@defaultLayout.layout>
 <script>
 $(function(){
-	
+
 	$("#add").click(function(){
-		window.location.href = '${rc.contextPath}/sys/admin/addVM';
+		window.location.href = '${rc.contextPath}/sys/role/addVM';
+	});
+
+	$(".am-pagination a").click(function(){
+		var page = $(this).text();
+		var name = $('#name').val();
+		window.location.href = '${rc.contextPath}/sys/role/list?page=' + page + '&name=' + name;
+	});
+
+	$("#search").click(function(){
+		var name = $('#name').val();
+		window.location.href = '${rc.contextPath}/sys/role/list?name=' + name;
 	});
 	
 })

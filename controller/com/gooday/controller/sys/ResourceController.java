@@ -14,6 +14,7 @@ import com.gooday.common.basic.BaseController;
 import com.gooday.model.resource.Resource;
 import com.gooday.service.sys.IResourceService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -28,24 +29,31 @@ public class ResourceController extends BaseController {
 	public String list(HttpServletRequest request, HttpServletResponse response){
 		logger.info("list");
 
-		List<TreeNode> resourceList = resourceService.listAllResource();
-
-		request.setAttribute("resourceList", resourceList);
-
 		return "sys/resource/list";
 	}
-	
-	@RequestMapping(value = "/view")
-	public String view(HttpServletRequest request, HttpServletResponse response){
-		logger.info("view");
-		
-		Long id = Long.valueOf(request.getParameter("id"));
-		
-		Resource resource = resourceService.getResourceById(id);
-		
-		request.setAttribute("resource", resource);
-		
-		return "sys/resource/view";
+
+	@RequestMapping(value = "/getAllResource")
+	@ResponseBody
+	public List<TreeNode> getAllResource(HttpServletRequest request, HttpServletResponse response){
+		logger.info("getAllResource");
+
+		List<TreeNode> treeNodeList = resourceService.listAllResource();
+
+		return treeNodeList;
 	}
+
+	@RequestMapping(value = "/getResourceById")
+	@ResponseBody
+	public Resource getResourceById(HttpServletRequest request, HttpServletResponse response){
+		logger.info("getResourceById");
+
+		Long id = Long.valueOf(request.getParameter("id"));
+
+		Resource resource = resourceService.getResourceById(id);
+
+		return resource;
+	}
+
+
 	
 }
