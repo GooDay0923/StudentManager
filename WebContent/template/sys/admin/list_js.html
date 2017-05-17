@@ -1,0 +1,34 @@
+<script src="${rc.contextPath}/static/plugins/tree/amazeui.tree.min.js"></script>
+<script>
+    $(function(){
+
+        $("#add").click(function(){
+            window.location.href = '${rc.contextPath}/sys/admin/addVM';
+        });
+
+        $(".am-pagination a").click(function(){
+            var page = $(this).text();
+            var username = $('#username').val();
+            window.location.href = '${rc.contextPath}/sys/admin/list?page=' + page + '&username=' + username;
+        });
+
+        $("#search").click(function(){
+            var username = $('#username').val();
+            window.location.href = '${rc.contextPath}/sys/admin/list?username=' + username;
+        });
+
+    });
+
+
+    function edit(id){
+        window.location.href = '${rc.contextPath}/sys/admin/editVM?id=' + id;
+    }
+
+    function remove(id){
+        if(confirm("确认要删除吗？")){
+            window.location.href = '${rc.contextPath}/sys/admin/remove?id=' + id;
+        }
+    }
+
+
+</script>

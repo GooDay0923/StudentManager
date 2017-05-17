@@ -15,7 +15,7 @@
   <meta name="apple-mobile-web-app-title" content="学生信息管理系统" />
   <link rel="stylesheet" href="${rc.contextPath}/static/assets/css/amazeui.min.css"/>
   <link rel="stylesheet" href="${rc.contextPath}/static/assets/css/admin.css">
-  <link rel="stylesheet" href="${rc.contextPath}/static/plugins/tree/amazeui.tree.min.css">
+  <#include "${own_css}">
 </head>
 <body>
 <!--[if lte IE 9]>
@@ -32,12 +32,12 @@
 	  <!-- content start -->
 	  <div class="admin-content">
 	    <div class="admin-content-body">
-	    	
-	    	
+
+			${own_css}
 	      <#-- 在这里嵌入main content -->
 	      <#nested>
-	      
-	
+
+			  ${own_css}
 	    <#include "common/footer.html">
 	  </div>
 	  <!-- content end -->
@@ -57,7 +57,7 @@
 	<!--<![endif]-->
 	<script src="${rc.contextPath}/static/assets/js/amazeui.min.js"></script>
 	<script src="${rc.contextPath}/static/assets/js/app.js"></script>
-  	<script src="${rc.contextPath}/static/plugins/tree/amazeui.tree.min.js"></script>
+    <#include "${own_js}">
 </body>
 </html>
 </#macro>
