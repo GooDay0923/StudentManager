@@ -13,8 +13,7 @@
   <link rel="icon" type="image/png" href="${rc.contextPath}/static/assets/i/favicon.png">
   <link rel="apple-touch-icon-precomposed" href="${rc.contextPath}/static/assets/i/app-icon72x72@2x.png">
   <meta name="apple-mobile-web-app-title" content="学生信息管理系统" />
-  <link rel="stylesheet" href="${rc.contextPath}/static/assets/css/amazeui.min.css"/>
-  <link rel="stylesheet" href="${rc.contextPath}/static/assets/css/admin.css">
+  <#include "common/common_css.html">
   <#include "${own_css}">
 </head>
 <body>
@@ -26,18 +25,16 @@
 	<#include "common/header.html">
 
 	<div class="am-cf admin-main">
-	
+
   	  <#include "common/menus.html">
-	
+
 	  <!-- content start -->
 	  <div class="admin-content">
 	    <div class="admin-content-body">
 
-			${own_css}
 	      <#-- 在这里嵌入main content -->
 	      <#nested>
 
-			  ${own_css}
 	    <#include "common/footer.html">
 	  </div>
 	  <!-- content end -->
@@ -46,17 +43,7 @@
 
 	<a href="#" class="am-icon-btn am-icon-th-list am-show-sm-only admin-menu" data-am-offcanvas="{target: '#admin-offcanvas'}"></a>
 
-	<!--[if lt IE 9]>
-	<script src="http://libs.baidu.com/jquery/1.11.1/jquery.min.js"></script>
-	<script src="http://cdn.staticfile.org/modernizr/2.8.3/modernizr.js"></script>
-	<script src="assets/js/amazeui.ie8polyfill.min.js"></script>
-	<![endif]-->
-	
-	<!--[if (gte IE 9)|!(IE)]><!-->
-	<script src="${rc.contextPath}/static/assets/js/jquery.min.js"></script>
-	<!--<![endif]-->
-	<script src="${rc.contextPath}/static/assets/js/amazeui.min.js"></script>
-	<script src="${rc.contextPath}/static/assets/js/app.js"></script>
+    <#include "common/common_js.html">
     <#include "${own_js}">
 </body>
 </html>
