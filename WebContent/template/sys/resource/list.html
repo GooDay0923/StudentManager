@@ -16,116 +16,80 @@
 <hr>
 
 <div class="am-g">
-	<div class="am-u-sm-4">
-		<ul class="am-tree" id="firstTree">
-			<li class="am-tree-branch am-hide" data-template="treebranch">
-				<div class="am-tree-branch-header">
-					<button class="am-tree-branch-name">
-						<span class="am-tree-icon am-tree-icon-folder"></span>
-						<span class="am-tree-label"></span>
-					</button>
+	<div class="am-u-sm-6">
+		<ul id="resource-tree" class="ztree"></ul>
+	</div>
+
+
+	<div class="am-u-sm-6">
+
+		<form class="am-form am-form-horizontal">
+			<div class="am-form-group">
+				<label for="name" class="am-u-sm-2 am-form-label">名称</label>
+				<div class="am-u-sm-10">
+					<input type="text" id="name" placeholder="名称">
 				</div>
-				<ul class="am-tree-branch-children"></ul>
-				<div class="am-tree-loader"><span class="am-icon-spin am-icon-spinner"></span></div>
-			</li>
-			<li class="am-tree-item am-hide" data-template="treeitem">
-				<button class="am-tree-item-name">
-					<span class="am-tree-icon am-tree-icon-item"></span>
-					<span class="am-tree-label"></span>
-				</button>
-			</li>
-		</ul>
+			</div>
+
+			<div class="am-form-group">
+				<label for="description" class="am-u-sm-2 am-form-label">描述</label>
+				<div class="am-u-sm-10">
+					<input type="text" id="description" placeholder="描述">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="icon" class="am-u-sm-2 am-form-label">图标</label>
+				<div class="am-u-sm-10">
+					<input type="password" id="icon" placeholder="图标">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="url" class="am-u-sm-2 am-form-label">路径</label>
+				<div class="am-u-sm-10">
+					<input type="password" id="url" placeholder="路径">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="permission" class="am-u-sm-2 am-form-label">权限</label>
+				<div class="am-u-sm-10">
+					<input type="password" id="permission" placeholder="权限">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="type" class="am-u-sm-2 am-form-label">类型</label>
+				<div class="am-u-sm-10">
+					<input type="password" id="type" placeholder="类型">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="sort" class="am-u-sm-2 am-form-label">排序</label>
+				<div class="am-u-sm-10">
+					<input type="password" id="sort" placeholder="排序">
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<label for="role" class="am-u-sm-2 am-form-label">角色</label>
+				<div class="am-u-sm-10">
+					<select id="role"> <#list roleList as role>
+						<option value="${role.id}">${role.name}</option> </#list>
+					</select>
+				</div>
+			</div>
+
+			<div class="am-form-group">
+				<div class="am-u-sm-10 am-u-sm-offset-2">
+					<button type="button" class="am-btn am-btn-primary am-btn-xs" id="submit">保存</button>
+				</div>
+			</div>
+		</form>
+
 	</div>
 </div>
 
-
-
 </@defaultLayout.layout>
-
-
-<script>
-
-	$(function() {
-
-		var data = [
-			{
-				title: '苹果公司',
-				type: 'folder',
-				products: [
-					{
-						title: 'iPhone',
-						type: 'item'
-					},
-					{
-						title: 'iMac',
-						type: 'item'
-					},
-					{
-						title: 'MacBook Pro',
-						type: 'item'
-					}
-				]
-			},
-			{
-				title: '微软公司',
-				type: 'item'
-			},
-			{
-				title: 'GitHub',
-				type: 'item',
-				attr: {
-					icon: 'am-icon-github'
-				}
-			},
-			{
-				title: '苹果公司',
-				type: 'folder',
-				products: [
-					{
-						title: 'iPhone',
-						type: 'item'
-					},
-					{
-						title: 'iMac',
-						type: 'item'
-					},
-					{
-						title: 'MacBook Pro',
-						type: 'item'
-					}
-				]
-			},
-			{
-				title: '苹果公司',
-				type: 'folder',
-				products: [
-					{
-						title: 'iPhone',
-						type: 'item'
-					},
-					{
-						title: 'iMac',
-						type: 'item'
-					},
-					{
-						title: 'MacBook Pro',
-						type: 'item'
-					}
-				]
-			},
-		];
-
-		$('#firstTree').tree({
-			dataSource: function(options, callback) {
-				// 模拟异步加载
-				setTimeout(function() {
-					callback({data: options.products || data});
-				}, 400);
-			},
-			multiSelect: false,
-			cacheItems: true,
-			folderSelect: false
-		});
-	});
-
-</script>

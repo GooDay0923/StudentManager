@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.github.pagehelper.PageInfo;
+import com.gooday.common.basic.JsonResult;
 import com.gooday.common.model.TreeNode;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,14 +45,24 @@ public class ResourceController extends BaseController {
 
 	@RequestMapping(value = "/getResourceById")
 	@ResponseBody
-	public Resource getResourceById(HttpServletRequest request, HttpServletResponse response){
+	public JsonResult getResourceById(HttpServletRequest request, HttpServletResponse response){
 		logger.info("getResourceById");
 
-		Long id = Long.valueOf(request.getParameter("id"));
+		JsonResult jsonResult = new JsonResult();
 
-		Resource resource = resourceService.getResourceById(id);
+		try{
+			Long id = Long.valueOf(request.getParameter("id"));
 
-		return resource;
+			Resource resource = resourceService.getResourceById(id);
+
+			jsonResult.setCode(JsonResult.OP_SUCCESS);
+			jsonResult.setData(resource);
+		} catch (Exception e){
+			jsonResult.setCode(JsonResult.OP_ERROR);
+			jsonResult.setMessage(e.getMessage());
+		}
+
+		return jsonResult;
 	}
 
 

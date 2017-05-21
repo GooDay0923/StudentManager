@@ -1,31 +1,59 @@
+<script src="${rc.contextPath}/static/plugins/ztree/js/jquery.ztree.all.min.js"></script>
 <script>
+
     $(function(){
-
-        $("#add").click(function(){
-            window.location.href = '${rc.contextPath}/sys/admin/addVM';
-        });
-
-        $(".am-pagination a").click(function(){
-            var page = $(this).text();
-            var username = $('#username').val();
-            window.location.href = '${rc.contextPath}/sys/admin/list?page=' + page + '&username=' + username;
-        });
-
-        $("#search").click(function(){
-            var username = $('#username').val();
-            window.location.href = '${rc.contextPath}/sys/admin/list?username=' + username;
-        });
-
+        var treeObj = $.fn.zTree.init($("#resource-tree"), setting);
     });
 
-    function edit(id){
-        window.location.href = '${rc.contextPath}/sys/admin/editVM?id=' + id;
-    }
+    var tree = (function() {
+        return {
+            addHoverDom : function(){
+                console.log("addHoverDom");
+            },
 
-    function remove(id){
-        if(confirm("确认要删除吗？")){
-            window.location.href = '${rc.contextPath}/sys/admin/remove?id=' + id;
+            removeHoverDom : function(){
+                console.log("removeHoverDom");
+            }
+
         }
-    }
+    })();
+
+    // zTree 的参数配置，深入使用请参考 API 文档（setting 配置详解）
+    var setting = {
+        async: {
+            enable: true,
+            url:"${rc.contextPath}/sys/resource/getAllResource",
+            autoParam:["id", "name", "pId=parentId", "iconSkin=icon"]
+        },
+        edit: {
+            enable: true
+        },
+        view: {
+            expandSpeed:"fast",
+            selectedMulti: false,
+            showIcon: false,
+            addHoverDom: tree.addHoverDom,
+            removeHoverDom: tree.removeHoverDom,
+        },
+        data: {
+//            simpleData: {
+//                enable: true,
+//                idKey: "id",
+//                pIdKey: "parentId",
+//                rootPId: 0
+//            }
+        },
+        callback: {
+
+        }
+    };
+    // zTree 的数据属性，深入使用请参考 API 文档（zTreeNode 节点数据详解）
+    var zNodes = [
+        {name:"test1", open:true, children:[
+            {name:"test1_1"}, {name:"test1_2"}]},
+        {name:"test2", open:true, children:[
+            {name:"test2_1"}, {name:"test2_2"}]}
+    ];
+
 
 </script>
