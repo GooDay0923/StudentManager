@@ -7,29 +7,40 @@
 
     var tree = (function() {
         return {
-            addHoverDom : function(){
-                console.log("addHoverDom");
+            addHoverDom : function(treeId, treeNode){
+                var sObj = $("#" + treeNode.tId + "_span");
+                if (treeNode.editNameFlag || $("#addBtn_"+treeNode.tId).length>0) return;
+                var addStr = "<span class='button add' id='addBtn_" + treeNode.tId
+                        + "' title='add' onfocus='this.blur();'></span>";
+                sObj.after(addStr);
+                var btn = $("#addBtn_"+treeNode.tId);
+                if (btn) btn.bind("click", function(){
+                    var zTree = $.fn.zTree.getZTreeObj("resource-tree");
+                    var newTreeNode = {parentId:treeNode.id, pId:treeNode.id, name:"资源名称" + (newCount++)};
+                    $.post('${rc.contextPath}/sys/resource/add', newTreeNode, function(result){
+                        if(result.code == 1){
+                            newTreeNode["id"]=result.data.id;
+                            zTree.addNodes(treeNode, newTreeNode);
+                        }else{
+
+                        }
+                    });
+                    return false;
+                });
             },
 
-            removeHoverDom : function(){
-                console.log("removeHoverDom");
+            removeHoverDom : function(treeId, treeNode){
+                $("#addBtn_"+treeNode.tId).unbind().remove();
             },
 
             zTreeOnRename : function(event, treeId, treeNode, isCancel){
-                console.log(event);
-                console.log(treeId);
-                console.log(treeNode);
-                console.log(isCancel);
-//                if(!isCancel){
-//                    $.post("${rc.contextPath}/sys/resource/edit", treeNode);
-//                }
+                if(!isCancel){
+                    $.post("${rc.contextPath}/sys/resource/edit", treeNode);
+                }
             },
 
             zTreeOnRemove : function(event, treeId, treeNode){
-                console.log(event);
-                console.log(treeId);
-                console.log(treeNode);
-//                $.post("${rc.contextPath}/sys/resource/remove", treeNode);
+                $.post("${rc.contextPath}/sys/resource/remove", treeNode);
             },
 
             zTreeOnClick : function(event, treeId, treeNode, clickFlag){

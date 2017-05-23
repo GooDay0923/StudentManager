@@ -42,5 +42,22 @@ public class JsonResult {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	public static JsonResult success(Object data, String message){
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.setCode(OP_SUCCESS);
+		jsonResult.setData(data);
+		jsonResult.setMessage(message);
+
+		return jsonResult;
+	}
+
+	public static JsonResult error(String message){
+		JsonResult jsonResult = new JsonResult();
+		jsonResult.setCode(OP_ERROR);
+		jsonResult.setMessage(message);
+
+		return jsonResult;
+	}
     
 }

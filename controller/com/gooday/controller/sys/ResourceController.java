@@ -58,21 +58,11 @@ public class ResourceController extends BaseController {
 	public JsonResult get(@PathVariable String id, HttpServletRequest request, HttpServletResponse response){
 		logger.info("get");
 
-		JsonResult jsonResult = new JsonResult();
+		Long resourceId = Long.valueOf(id);
 
-		try{
-			Long resourceId = Long.valueOf(id);
+		Resource resource = resourceService.getResourceById(resourceId);
 
-			Resource resource = resourceService.getResourceById(resourceId);
-
-			jsonResult.setCode(JsonResult.OP_SUCCESS);
-  			jsonResult.setData(resource);
-		} catch (Exception e){
-			jsonResult.setCode(JsonResult.OP_ERROR);
-			jsonResult.setMessage(e.getMessage());
-		}
-
-		return jsonResult;
+		return JsonResult.success(resource, "");
 	}
 
 
