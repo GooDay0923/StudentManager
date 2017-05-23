@@ -199,5 +199,12 @@
     FROM resource
     WHERE p_id = #{pId,jdbcType=BIGINT}
   </select>
+
+  <select id="selectAllMenus" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM resource
+    WHERE type = 0 AND deleted = 0
+  </select>
   
 </mapper>

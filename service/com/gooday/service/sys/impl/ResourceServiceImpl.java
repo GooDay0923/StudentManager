@@ -122,18 +122,24 @@ public class ResourceServiceImpl implements IResourceService{
 
 		List<TreeNode> menus = new ArrayList<TreeNode>();
 
-		List<Resource> resourceList = resourceMapper.selectByPId(0L);
+		List<Resource> resourceList = resourceMapper.selectAllMenus();
 
-		for(Resource resource :resourceList){
-			//如果不是菜单则跳过
-			if(!resource.getType().equals(Resource.TYPE_MENU)){
-				continue;
-			}
-
-
+		for(Resource resource : resourceList){
+			menus.add(toTreeNode(resource));
 		}
 
-		return null;
+		return menus;
+	}
+
+	private TreeNode toTreeNode(Resource resource){
+		TreeNode treeNode = new TreeNode();
+		treeNode.setId(resource.getId().toString());
+		treeNode.setName(resource.getName());
+		treeNode.setUrl(resource.getUrl());
+		treeNode.setIcon(resource.getIcon());
+		treeNode.setParentId(resource.getpId().toString());
+
+		return treeNode;
 	}
 
 }

@@ -27,57 +27,62 @@
 			<div class="am-form-group">
 				<label for="name" class="am-u-sm-2 am-form-label">名称</label>
 				<div class="am-u-sm-10">
-					<input type="text" id="name" placeholder="名称">
+					<input type="text" name="name" id="name" placeholder="名称">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="description" class="am-u-sm-2 am-form-label">描述</label>
 				<div class="am-u-sm-10">
-					<input type="text" id="description" placeholder="描述">
+					<input type="text" name="description" id="description" placeholder="描述">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="icon" class="am-u-sm-2 am-form-label">图标</label>
 				<div class="am-u-sm-10">
-					<input type="password" id="icon" placeholder="图标">
+					<input type="text" name="icon" id="icon" placeholder="图标">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="url" class="am-u-sm-2 am-form-label">路径</label>
 				<div class="am-u-sm-10">
-					<input type="password" id="url" placeholder="路径">
+					<input type="text" name="url" id="url" placeholder="路径">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="permission" class="am-u-sm-2 am-form-label">权限</label>
 				<div class="am-u-sm-10">
-					<input type="password" id="permission" placeholder="权限">
+					<input type="text" name="permission" id="permission" placeholder="权限">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="type" class="am-u-sm-2 am-form-label">类型</label>
 				<div class="am-u-sm-10">
-					<input type="password" id="type" placeholder="类型">
+					<select id="type" name="type" class="form-control select2">
+						<option value="0" selected="selected">菜单</option>
+						<option value="1">按钮</option>
+					</select>
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="sort" class="am-u-sm-2 am-form-label">排序</label>
 				<div class="am-u-sm-10">
-					<input type="password" id="sort" placeholder="排序">
+					<input type="text" name="sort" id="sort" placeholder="排序">
 				</div>
 			</div>
 
 			<div class="am-form-group">
 				<label for="role" class="am-u-sm-2 am-form-label">角色</label>
 				<div class="am-u-sm-10">
-					<select id="role"> <#list roleList as role>
-						<option value="${role.id}">${role.name}</option> </#list>
+					<select id="role">
+						<#list roleList as role>
+						<option value="${role.id}">${role.name}</option>
+						</#list>
 					</select>
 				</div>
 			</div>

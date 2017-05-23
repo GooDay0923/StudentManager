@@ -36,7 +36,7 @@ public class AdminController extends BaseController {
 	private IRoleService roleService;
 	
 	@RequestMapping(value = "/list")
-//	@RequiresPermissions("sys:config:list")
+//	@RequiresPermissions("sys:admin:list")
 	public String list(HttpServletRequest request, HttpServletResponse response,
 					   @RequestParam(required = false, defaultValue = "1") String page,
 					   @RequestParam(required = false, defaultValue = "10") String rows){
@@ -55,7 +55,6 @@ public class AdminController extends BaseController {
 			sqlRows =  Integer.parseInt(rows);
 		}
 
-
 		List<Admin> adminList = adminService.listAdminByUserName(username, sqlPage, sqlRows);
 
 		request.setAttribute("pageInfo", new PageInfo<Admin>(adminList));
@@ -67,6 +66,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/view")
+	//	@RequiresPermissions("sys:admin:view")
 	public String view(HttpServletRequest request, HttpServletResponse response){
 		logger.info("view");
 		
@@ -96,8 +96,11 @@ public class AdminController extends BaseController {
 	}
 
 	@RequestMapping(value = "/edit")
-	public String edit(HttpServletRequest request, HttpServletResponse response){
+	@ResponseBody
+	public JsonResult edit(HttpServletRequest request, HttpServletResponse response){
 		logger.info("edit");
+
+		JsonResult jsonResult = new JsonResult();
 
 		Long id = Long.valueOf(request.getParameter("id"));
 		String password = request.getParameter("password");
@@ -110,7 +113,7 @@ public class AdminController extends BaseController {
 
 		request.setAttribute("admin", admin);
 
-		return "sys/admin/edit";
+		return jsonResult;
 	}
 	
 	@RequestMapping(value = "/addVM")
@@ -160,6 +163,7 @@ public class AdminController extends BaseController {
 	}
 	
 	@RequestMapping(value = "/remove")
+	@ResponseBody
 	public JsonResult delete(HttpServletRequest request, HttpServletResponse response){
 		logger.info("remove");
 		

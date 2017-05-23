@@ -6,9 +6,12 @@ import javax.servlet.http.HttpServletResponse;
 import com.github.pagehelper.PageInfo;
 import com.gooday.common.basic.JsonResult;
 import com.gooday.common.model.TreeNode;
+import com.gooday.model.role.Role;
+import com.gooday.service.sys.IRoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.gooday.common.basic.BaseController;
@@ -25,10 +28,17 @@ public class ResourceController extends BaseController {
 
 	@Autowired
 	private IResourceService resourceService;
-	
-	@RequestMapping(value = "/list")
+
+    @Autowired
+    private IRoleService roleService;
+
+    @RequestMapping(value = "/list")
 	public String list(HttpServletRequest request, HttpServletResponse response){
 		logger.info("list");
+
+        List<Role> roleList = roleService.listAllRole();
+
+        request.setAttribute("roleList", roleList);
 
 		return "sys/resource/list";
 	}
@@ -43,20 +53,20 @@ public class ResourceController extends BaseController {
 		return treeNodeList;
 	}
 
-	@RequestMapping(value = "/getResourceById")
+	@RequestMapping(value = "/get/{id}")
 	@ResponseBody
-	public JsonResult getResourceById(HttpServletRequest request, HttpServletResponse response){
-		logger.info("getResourceById");
+	public JsonResult get(@PathVariable String id, HttpServletRequest request, HttpServletResponse response){
+		logger.info("get");
 
 		JsonResult jsonResult = new JsonResult();
 
 		try{
-			Long id = Long.valueOf(request.getParameter("id"));
+			Long resourceId = Long.valueOf(id);
 
-			Resource resource = resourceService.getResourceById(id);
+			Resource resource = resourceService.getResourceById(resourceId);
 
 			jsonResult.setCode(JsonResult.OP_SUCCESS);
-			jsonResult.setData(resource);
+  			jsonResult.setData(resource);
 		} catch (Exception e){
 			jsonResult.setCode(JsonResult.OP_ERROR);
 			jsonResult.setMessage(e.getMessage());

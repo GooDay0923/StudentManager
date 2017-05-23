@@ -22,5 +22,7 @@ public interface ResourceMapper {
     List<Resource> selectByType(Short type);
     
     List<Resource> selectByPId(Long pId);
+
+    List<Resource> selectAllMenus();
     
 }
