@@ -103,5 +103,15 @@
     <include refid="Base_Column_List" />
     from role
   </select>
+
+  <select id="selectAllByName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from role WHERE 1
+    <if test="name != null and name != ''">
+      AND `name` LIKE #{name,jdbcType=VARCHAR}"%"
+    </if>
+  </select>
+
   
 </mapper>

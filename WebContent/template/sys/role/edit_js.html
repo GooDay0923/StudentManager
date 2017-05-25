@@ -1,0 +1,70 @@
+<script>
+    $(function() {
+
+        $("#submit").click(function() {
+            admin.submit();
+        });
+
+        $("#goback").click(function() {
+            admin.goback();
+        });
+
+    });
+
+    var admin = (function() {
+
+        return {
+
+            submit : function() {
+
+                var data = {}, url = "${rc.contextPath}/sys/admin/edit";
+
+                $("form input").each(function(i, n){
+                    var that = $(this);
+                    var attrName = that.attr("id");
+                    data[attrName] = that.val();
+                });
+
+                data["roleId"] = 1;
+
+                $.post(url, data)
+                    .done(function(result){
+                        if(result.code == 1){
+                            window.location.href = '${rc.contextPath}/sys/admin/list';
+                        } else {
+                            alert(result.message);
+                        }
+                    })
+                    .fail(function(result){
+                        alert(result.message);
+                    })
+
+            },
+
+            checkPassword : function() {
+                var password = $("#password").val();
+                var repassword = $("#password").val();
+                if (password != repassword) {
+
+                }
+            },
+
+            checkUsername : function() {
+                var username = $("#username").val();
+                var url = '';
+                var data = {
+                    username : username
+                };
+                $.post(url, data, function() {
+
+                }).then();
+            },
+
+            goback : function() {
+                window.history.go(-1);
+            },
+
+        }
+
+    })();
+</script>

@@ -2,6 +2,7 @@ package com.gooday.service.sys.impl;
 
 import java.util.List;
 
+import com.github.pagehelper.PageHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,6 +38,12 @@ public class RoleServiceImpl implements IRoleService{
 	@Override
 	public List<Role> listAllRole() {
 		return roleMapper.selectAll();
+	}
+
+	@Override
+	public List<Role> listRoleByName(String name, int page, int rows) {
+		PageHelper.startPage(page, rows);
+		return roleMapper.selectAllByName(name);
 	}
 
 }

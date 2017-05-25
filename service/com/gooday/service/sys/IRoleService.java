@@ -13,5 +13,7 @@ public interface IRoleService {
 	public void removeRoleById(Long id);
 	
 	public List<Role> listAllRole();
+
+	public List<Role> listRoleByName(String name, int page, int rows);
 	
 }

@@ -3,6 +3,7 @@ package com.gooday.mapper.role;
 import java.util.List;
 
 import com.gooday.model.role.Role;
+import org.apache.ibatis.annotations.Param;
 
 public interface RoleMapper {
     int deleteByPrimaryKey(Long id);
@@ -18,4 +19,7 @@ public interface RoleMapper {
     int updateByPrimaryKey(Role record);
     
     List<Role> selectAll();
+
+    List<Role> selectAllByName(@Param("name")String name);
+
 }

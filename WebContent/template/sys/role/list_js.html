@@ -1,0 +1,31 @@
+<script>
+    $(function(){
+
+        $("#add").click(function(){
+            window.location.href = '${rc.contextPath}/sys/role/addVM';
+        });
+
+        $(".am-pagination a").click(function(){
+            var page = $(this).text();
+            var username = $('#name').val();
+            window.location.href = '${rc.contextPath}/sys/role/list?page=' + page + '&username=' + username;
+        });
+
+        $("#search").click(function(){
+            var name = $('#name').val();
+            window.location.href = '${rc.contextPath}/sys/role/list?name=' + name;
+        });
+
+    });
+
+    function edit(id){
+        window.location.href = '${rc.contextPath}/sys/role/editVM?id=' + id;
+    }
+
+    function remove(id){
+        if(confirm("确认要删除吗？")){
+            window.location.href = '${rc.contextPath}/sys/role/remove?id=' + id;
+        }
+    }
+
+</script>

@@ -12,10 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.gooday.common.basic.BaseController;
 import com.gooday.common.basic.JsonResult;
@@ -35,7 +32,7 @@ public class AdminController extends BaseController {
 	@Autowired
 	private IRoleService roleService;
 	
-	@RequestMapping(value = "/list")
+	@RequestMapping(value = "/list", method = RequestMethod.GET)
 //	@RequiresPermissions("sys:admin:list")
 	public String list(HttpServletRequest request, HttpServletResponse response,
 					   @RequestParam(required = false, defaultValue = "1") String page,
@@ -65,7 +62,7 @@ public class AdminController extends BaseController {
 		return "sys/admin/list";
 	}
 	
-	@RequestMapping(value = "/view")
+	@RequestMapping(value = "/view", method = RequestMethod.GET)
 	//	@RequiresPermissions("sys:admin:view")
 	public String view(HttpServletRequest request, HttpServletResponse response){
 		logger.info("view");
@@ -79,7 +76,7 @@ public class AdminController extends BaseController {
 		return "sys/admin/view";
 	}
 	
-	@RequestMapping(value = "/editVM")
+	@RequestMapping(value = "/editVM", method = RequestMethod.GET)
 	public String editVM(HttpServletRequest request, HttpServletResponse response){
 		logger.info("edit");
 
@@ -95,7 +92,7 @@ public class AdminController extends BaseController {
 		return "sys/admin/edit";
 	}
 
-	@RequestMapping(value = "/edit")
+	@RequestMapping(value = "/edit", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult edit(HttpServletRequest request, HttpServletResponse response){
 		logger.info("edit");
@@ -116,7 +113,7 @@ public class AdminController extends BaseController {
 		return jsonResult;
 	}
 	
-	@RequestMapping(value = "/addVM")
+	@RequestMapping(value = "/addVM", method = RequestMethod.GET)
 	public String addVM(HttpServletRequest request, HttpServletResponse response){
 		logger.info("addVM");
 		
@@ -127,7 +124,7 @@ public class AdminController extends BaseController {
 		return "sys/admin/add";
 	}
 	
-	@RequestMapping(value = "/add")
+	@RequestMapping(value = "/add", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult add(HttpServletRequest request, HttpServletResponse response) throws Exception{
 		logger.info("add");
@@ -162,7 +159,7 @@ public class AdminController extends BaseController {
 		return jsonResult;
 	}
 	
-	@RequestMapping(value = "/remove")
+	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult delete(HttpServletRequest request, HttpServletResponse response){
 		logger.info("remove");
