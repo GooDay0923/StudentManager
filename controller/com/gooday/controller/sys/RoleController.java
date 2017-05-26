@@ -5,6 +5,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.github.pagehelper.PageInfo;
 import com.gooday.common.basic.JsonResult;
+import com.gooday.common.util.DateUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,6 +15,7 @@ import com.gooday.common.basic.BaseController;
 import com.gooday.model.role.Role;
 import com.gooday.service.sys.IRoleService;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
 
@@ -74,21 +76,39 @@ public class RoleController extends BaseController {
 	}
 
 	@RequestMapping(value = "/add")
+    @ResponseBody
 	public JsonResult add(HttpServletRequest request, HttpServletResponse response){
 		logger.info("add");
 
+        String name = request.getParameter("name");
+        String remark = request.getParameter("remark");
 
-		return JsonResult.success(null, null);
+        Integer currentTime = DateUtil.getCurrentUnixTime();
+
+        Role role = new Role();
+        role.setName(name);
+        role.setRemark(remark);
+        role.setGmtCreate(currentTime);
+        role.setGmtModified(currentTime);
+
+        Integer result = roleService.saveRole(role);
+        if(result.equals(1)){
+            return JsonResult.success(null, "");
+        } else {
+            return JsonResult.error("");
+        }
+
 	}
 
     @RequestMapping(value = "/editVM")
     public String editVM(HttpServletRequest request, HttpServletResponse response){
         logger.info("editVM");
 
-        return "sys/role/add";
+        return "sys/role/edit";
     }
 
     @RequestMapping(value = "/edit")
+    @ResponseBody
     public JsonResult edit(HttpServletRequest request, HttpServletResponse response){
         logger.info("edit");
 
@@ -97,10 +117,13 @@ public class RoleController extends BaseController {
     }
 
     @RequestMapping(value = "/remove")
+    @ResponseBody
     public JsonResult remove(HttpServletRequest request, HttpServletResponse response){
         logger.info("remove");
 
+        Long id = Long.valueOf(request.getParameter("id"));
 
+        roleService.removeRoleById(id);
 
         return JsonResult.success(null, null);
     }

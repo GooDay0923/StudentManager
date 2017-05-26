@@ -8,7 +8,7 @@ public interface IRoleService {
 
 	public Role getRoleById(Long id);
 	
-	public void saveRole(Role role);
+	public Integer saveRole(Role role);
 	
 	public void removeRoleById(Long id);
 	

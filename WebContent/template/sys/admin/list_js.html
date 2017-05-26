@@ -24,7 +24,11 @@
 
     function remove(id){
         if(confirm("确认要删除吗？")){
-            window.location.href = '${rc.contextPath}/sys/admin/remove?id=' + id;
+            var url = '${rc.contextPath}/sys/admin/remove';
+            $.post(url, { id : id }, function(){
+                window.location.reload();
+            });
+
         }
     }
 

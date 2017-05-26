@@ -161,7 +161,7 @@ public class AdminController extends BaseController {
 	
 	@RequestMapping(value = "/remove", method = RequestMethod.POST)
 	@ResponseBody
-	public JsonResult delete(HttpServletRequest request, HttpServletResponse response){
+	public JsonResult remove(HttpServletRequest request, HttpServletResponse response){
 		logger.info("remove");
 		
 		JsonResult jsonResult = new JsonResult();

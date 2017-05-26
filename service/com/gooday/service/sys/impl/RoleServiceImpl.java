@@ -26,8 +26,8 @@ public class RoleServiceImpl implements IRoleService{
 	}
 
 	@Override
-	public void saveRole(Role role) {
-		roleMapper.insertSelective(role);
+	public Integer saveRole(Role role) {
+		return roleMapper.insertSelective(role);
 	}
 
 	@Override

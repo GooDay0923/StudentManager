@@ -79,12 +79,12 @@
 						<td>
 							<div class="am-btn-toolbar">
 								<div class="am-btn-group am-btn-group-xs">
-									<button
-										class="am-btn am-btn-default am-btn-xs am-text-secondary">
+									<button type="button"
+											class="am-btn am-btn-default am-btn-xs am-text-secondary" onclick="edit(${role.id});">
 										<span class="am-icon-pencil-square-o"></span> 编辑
 									</button>
-									<button
-										class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only">
+									<button type="button"
+											class="am-btn am-btn-default am-btn-xs am-text-danger am-hide-sm-only" onclick="remove(${role.id});">
 										<span class="am-icon-trash-o"></span> 删除
 									</button>
 								</div>
@@ -130,23 +130,3 @@
 </div>
 
 </@defaultLayout.layout>
-<script>
-$(function(){
-
-	$("#add").click(function(){
-		window.location.href = '${rc.contextPath}/sys/role/addVM';
-	});
-
-	$(".am-pagination a").click(function(){
-		var page = $(this).text();
-		var name = $('#name').val();
-		window.location.href = '${rc.contextPath}/sys/role/list?page=' + page + '&name=' + name;
-	});
-
-	$("#search").click(function(){
-		var name = $('#name').val();
-		window.location.href = '${rc.contextPath}/sys/role/list?name=' + name;
-	});
-	
-})
-</script>
